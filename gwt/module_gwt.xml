@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_gwt" default="compile.module.gwt">
+  <dirname property="module.gwt.basedir" file="${ant.file.module_gwt}"/>
+  
+  <property name="module.jdk.home.gwt" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.gwt" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.gwt" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.gwt" value="-encoding UTF-8 -source 8 ${compiler.args}"/>
+  
+  <property name="gwt.output.dir" value="${module.gwt.basedir}/../build/classes/production/gwt"/>
+  <property name="gwt.testoutput.dir" value="${module.gwt.basedir}/../build/classes/test/gwt"/>
+  
+  <path id="gwt.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="gwt.module.production.classpath">
+    <path refid="${module.jdk.classpath.gwt}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.0-SNAPSHOT/7cdf17122b21273652497bb12e47d423ea28ec1a/gdx-backend-gwt-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.0-SNAPSHOT/7f17f9dc5c916afec9976a883f2665d4df65dd29/gdx-backend-gwt-1.0-SNAPSHOT-sources.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/60b4ca55d67dec17b5d554e2351811ab5a67493d/gdx-1.0-SNAPSHOT-sources.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.0.0.GA/7a561191db2203550fbfa40d534d4997624cd369/validation-api-1.0.0.GA-sources.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.0.0.GA/b6bd7f9d78f6fdaa3c37dae18a4bd298915f328e/validation-api-1.0.0.GA.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.json/json/20090211/c183aa3a2a6250293808bba12262c8920ce5a51c/json-20090211.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.google.gwt/gwt-user/2.6.0/8237d1bd37127188107388c8724be44a0e9f73ca/gwt-user-2.6.0.jar"/>
+    <pathelement location="${core.output.dir}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <path refid="library.com.badlogicgames.gdx:gdx-tools:0.9.9.classpath"/>
+  </path>
+  
+  <path id="gwt.runtime.production.module.classpath">
+    <pathelement location="${gwt.output.dir}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.0-SNAPSHOT/7cdf17122b21273652497bb12e47d423ea28ec1a/gdx-backend-gwt-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.0-SNAPSHOT/7f17f9dc5c916afec9976a883f2665d4df65dd29/gdx-backend-gwt-1.0-SNAPSHOT-sources.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/60b4ca55d67dec17b5d554e2351811ab5a67493d/gdx-1.0-SNAPSHOT-sources.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.0.0.GA/7a561191db2203550fbfa40d534d4997624cd369/validation-api-1.0.0.GA-sources.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.0.0.GA/b6bd7f9d78f6fdaa3c37dae18a4bd298915f328e/validation-api-1.0.0.GA.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.json/json/20090211/c183aa3a2a6250293808bba12262c8920ce5a51c/json-20090211.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.google.gwt/gwt-user/2.6.0/8237d1bd37127188107388c8724be44a0e9f73ca/gwt-user-2.6.0.jar"/>
+    <path refid="core.runtime.production.module.classpath"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.google.gwt/gwt-servlet/2.6.0/d1e40c23bf78192482ee76c93619a10b4ea649f7/gwt-servlet-2.6.0.jar"/>
+  </path>
+  
+  <path id="gwt.module.classpath">
+    <path refid="${module.jdk.classpath.gwt}"/>
+    <pathelement location="${gwt.output.dir}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.0-SNAPSHOT/7cdf17122b21273652497bb12e47d423ea28ec1a/gdx-backend-gwt-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.0-SNAPSHOT/7f17f9dc5c916afec9976a883f2665d4df65dd29/gdx-backend-gwt-1.0-SNAPSHOT-sources.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/60b4ca55d67dec17b5d554e2351811ab5a67493d/gdx-1.0-SNAPSHOT-sources.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.0.0.GA/7a561191db2203550fbfa40d534d4997624cd369/validation-api-1.0.0.GA-sources.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.0.0.GA/b6bd7f9d78f6fdaa3c37dae18a4bd298915f328e/validation-api-1.0.0.GA.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.json/json/20090211/c183aa3a2a6250293808bba12262c8920ce5a51c/json-20090211.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.google.gwt/gwt-user/2.6.0/8237d1bd37127188107388c8724be44a0e9f73ca/gwt-user-2.6.0.jar"/>
+    <pathelement location="${core.testoutput.dir}"/>
+    <pathelement location="${core.output.dir}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <path refid="library.com.badlogicgames.gdx:gdx-tools:0.9.9.classpath"/>
+  </path>
+  
+  <path id="gwt.runtime.module.classpath">
+    <pathelement location="${gwt.testoutput.dir}"/>
+    <pathelement location="${gwt.output.dir}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.0-SNAPSHOT/7cdf17122b21273652497bb12e47d423ea28ec1a/gdx-backend-gwt-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.0-SNAPSHOT/7f17f9dc5c916afec9976a883f2665d4df65dd29/gdx-backend-gwt-1.0-SNAPSHOT-sources.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/60b4ca55d67dec17b5d554e2351811ab5a67493d/gdx-1.0-SNAPSHOT-sources.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.0.0.GA/7a561191db2203550fbfa40d534d4997624cd369/validation-api-1.0.0.GA-sources.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.0.0.GA/b6bd7f9d78f6fdaa3c37dae18a4bd298915f328e/validation-api-1.0.0.GA.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.json/json/20090211/c183aa3a2a6250293808bba12262c8920ce5a51c/json-20090211.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.google.gwt/gwt-user/2.6.0/8237d1bd37127188107388c8724be44a0e9f73ca/gwt-user-2.6.0.jar"/>
+    <path refid="core.runtime.module.classpath"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.google.gwt/gwt-servlet/2.6.0/d1e40c23bf78192482ee76c93619a10b4ea649f7/gwt-servlet-2.6.0.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.gwt">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.gwt">
+    <patternset refid="excluded.from.module.gwt"/>
+  </patternset>
+  
+  <path id="gwt.module.sourcepath">
+    <dirset dir="${module.gwt.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.gwt" depends="compile.module.gwt.production,compile.module.gwt.tests" description="Compile module gwt"/>
+  
+  <target name="compile.module.gwt.production" depends="register.custom.compilers,compile.module.core" description="Compile module gwt; production classes">
+    <mkdir dir="${gwt.output.dir}"/>
+    <javac2 destdir="${gwt.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.gwt}/javac">
+      <compilerarg line="${compiler.args.gwt}"/>
+      <bootclasspath refid="gwt.module.bootclasspath"/>
+      <classpath refid="gwt.module.production.classpath"/>
+      <src refid="gwt.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.gwt"/>
+    </javac2>
+    
+    <copy todir="${gwt.output.dir}">
+      <fileset dir="${module.gwt.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.gwt.tests" depends="register.custom.compilers,compile.module.gwt.production" description="compile module gwt; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.gwt" description="cleanup module">
+    <delete dir="${gwt.output.dir}"/>
+    <delete dir="${gwt.testoutput.dir}"/>
+  </target>
+</project>

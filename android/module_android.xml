@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_android" default="compile.module.android">
+  <dirname property="module.android.basedir" file="${ant.file.module_android}"/>
+  
+  <property name="module.jdk.home.android" value="${jdk.home.android_api_19_platform}"/>
+  <property name="module.jdk.bin.android" value="${jdk.bin.android_api_19_platform}"/>
+  <property name="module.jdk.classpath.android" value="jdk.classpath.android_api_19_platform"/>
+  
+  <property name="compiler.args.android" value="-encoding UTF-8 -source 8 ${compiler.args}"/>
+  
+  <property name="android.output.dir" value="${module.android.basedir}/../build/classes/production/android"/>
+  <property name="android.testoutput.dir" value="${module.android.basedir}/../build/classes/test/android"/>
+  
+  <path id="android.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="android.module.production.classpath">
+    <path refid="${module.jdk.classpath.android}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.0-SNAPSHOT/35de72543cd93396cd2be5c956ad1580f4a091ff/gdx-backend-android-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <pathelement location="${core.output.dir}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <path refid="library.com.badlogicgames.gdx:gdx-tools:0.9.9.classpath"/>
+  </path>
+  
+  <path id="android.runtime.production.module.classpath">
+    <pathelement location="${android.output.dir}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.0-SNAPSHOT/35de72543cd93396cd2be5c956ad1580f4a091ff/gdx-backend-android-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <path refid="core.runtime.production.module.classpath"/>
+  </path>
+  
+  <path id="android.module.classpath">
+    <path refid="${module.jdk.classpath.android}"/>
+    <pathelement location="${android.output.dir}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.0-SNAPSHOT/35de72543cd93396cd2be5c956ad1580f4a091ff/gdx-backend-android-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <pathelement location="${core.testoutput.dir}"/>
+    <pathelement location="${core.output.dir}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <path refid="library.com.badlogicgames.gdx:gdx-tools:0.9.9.classpath"/>
+  </path>
+  
+  <path id="android.runtime.module.classpath">
+    <pathelement location="${android.testoutput.dir}"/>
+    <pathelement location="${android.output.dir}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.0-SNAPSHOT/35de72543cd93396cd2be5c956ad1580f4a091ff/gdx-backend-android-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <path refid="core.runtime.module.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.android">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.android">
+    <patternset refid="excluded.from.module.android"/>
+  </patternset>
+  
+  <path id="android.module.sourcepath">
+    <dirset dir="${module.android.basedir}">
+      <include name="src"/>
+      <include name="gen"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.android" depends="compile.module.android.production,compile.module.android.tests" description="Compile module android"/>
+  
+  <target name="compile.module.android.production" depends="register.custom.compilers,compile.module.core" description="Compile module android; production classes">
+    <mkdir dir="${android.output.dir}"/>
+    <javac2 destdir="${android.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.android}/javac">
+      <compilerarg line="${compiler.args.android}"/>
+      <bootclasspath refid="android.module.bootclasspath"/>
+      <classpath refid="android.module.production.classpath"/>
+      <src refid="android.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.android"/>
+    </javac2>
+    
+    <copy todir="${android.output.dir}">
+      <fileset dir="${module.android.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.android.basedir}/gen">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.android.tests" depends="register.custom.compilers,compile.module.android.production" description="compile module android; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.android" description="cleanup module">
+    <delete dir="${android.output.dir}"/>
+    <delete dir="${android.testoutput.dir}"/>
+  </target>
+</project>

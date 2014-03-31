@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_ios" default="compile.module.ios">
+  <dirname property="module.ios.basedir" file="${ant.file.module_ios}"/>
+  
+  <property name="module.jdk.home.ios" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.ios" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.ios" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.ios" value="-encoding UTF-8 -source 8 ${compiler.args}"/>
+  
+  <property name="ios.output.dir" value="${module.ios.basedir}/../build/classes/production/ios"/>
+  <property name="ios.testoutput.dir" value="${module.ios.basedir}/../build/classes/test/ios"/>
+  
+  <path id="ios.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="ios.module.production.classpath">
+    <path refid="${module.jdk.classpath.ios}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.robovm/robovm-rt/0.0.10/7cf00fcb47d4a0980bb8d0a2d2c92db08a539566/robovm-rt-0.0.10.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.robovm/robovm-cocoatouch/0.0.10/4d0c0e0063fda7a2b76a00eb3170292c68b1ee01/robovm-cocoatouch-0.0.10.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-robovm/1.0-SNAPSHOT/9295498b83987e44c5de0e98091b4e7fbf42566f/gdx-backend-robovm-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.robovm/robovm-objc/0.0.10/faef96ac8e3f431816a0560825eead60b9836224/robovm-objc-0.0.10.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <pathelement location="${core.output.dir}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <path refid="library.com.badlogicgames.gdx:gdx-tools:0.9.9.classpath"/>
+  </path>
+  
+  <path id="ios.runtime.production.module.classpath">
+    <pathelement location="${ios.output.dir}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.robovm/robovm-rt/0.0.10/7cf00fcb47d4a0980bb8d0a2d2c92db08a539566/robovm-rt-0.0.10.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.robovm/robovm-cocoatouch/0.0.10/4d0c0e0063fda7a2b76a00eb3170292c68b1ee01/robovm-cocoatouch-0.0.10.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-robovm/1.0-SNAPSHOT/9295498b83987e44c5de0e98091b4e7fbf42566f/gdx-backend-robovm-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.robovm/robovm-objc/0.0.10/faef96ac8e3f431816a0560825eead60b9836224/robovm-objc-0.0.10.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <path refid="core.runtime.production.module.classpath"/>
+  </path>
+  
+  <path id="ios.module.classpath">
+    <path refid="${module.jdk.classpath.ios}"/>
+    <pathelement location="${ios.output.dir}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.robovm/robovm-rt/0.0.10/7cf00fcb47d4a0980bb8d0a2d2c92db08a539566/robovm-rt-0.0.10.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.robovm/robovm-cocoatouch/0.0.10/4d0c0e0063fda7a2b76a00eb3170292c68b1ee01/robovm-cocoatouch-0.0.10.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-robovm/1.0-SNAPSHOT/9295498b83987e44c5de0e98091b4e7fbf42566f/gdx-backend-robovm-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.robovm/robovm-objc/0.0.10/faef96ac8e3f431816a0560825eead60b9836224/robovm-objc-0.0.10.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <pathelement location="${core.testoutput.dir}"/>
+    <pathelement location="${core.output.dir}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <path refid="library.com.badlogicgames.gdx:gdx-tools:0.9.9.classpath"/>
+  </path>
+  
+  <path id="ios.runtime.module.classpath">
+    <pathelement location="${ios.testoutput.dir}"/>
+    <pathelement location="${ios.output.dir}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.robovm/robovm-rt/0.0.10/7cf00fcb47d4a0980bb8d0a2d2c92db08a539566/robovm-rt-0.0.10.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.robovm/robovm-cocoatouch/0.0.10/4d0c0e0063fda7a2b76a00eb3170292c68b1ee01/robovm-cocoatouch-0.0.10.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-robovm/1.0-SNAPSHOT/9295498b83987e44c5de0e98091b4e7fbf42566f/gdx-backend-robovm-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.robovm/robovm-objc/0.0.10/faef96ac8e3f431816a0560825eead60b9836224/robovm-objc-0.0.10.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <path refid="core.runtime.module.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.ios">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.ios">
+    <patternset refid="excluded.from.module.ios"/>
+  </patternset>
+  
+  <path id="ios.module.sourcepath">
+    <dirset dir="${module.ios.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.ios" depends="compile.module.ios.production,compile.module.ios.tests" description="Compile module ios"/>
+  
+  <target name="compile.module.ios.production" depends="register.custom.compilers,compile.module.core" description="Compile module ios; production classes">
+    <mkdir dir="${ios.output.dir}"/>
+    <javac2 destdir="${ios.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.ios}/javac">
+      <compilerarg line="${compiler.args.ios}"/>
+      <bootclasspath refid="ios.module.bootclasspath"/>
+      <classpath refid="ios.module.production.classpath"/>
+      <src refid="ios.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.ios"/>
+    </javac2>
+    
+    <copy todir="${ios.output.dir}">
+      <fileset dir="${module.ios.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.ios.tests" depends="register.custom.compilers,compile.module.ios.production" description="compile module ios; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.ios" description="cleanup module">
+    <delete dir="${ios.output.dir}"/>
+    <delete dir="${ios.testoutput.dir}"/>
+  </target>
+</project>

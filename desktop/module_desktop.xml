@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_desktop" default="compile.module.desktop">
+  <dirname property="module.desktop.basedir" file="${ant.file.module_desktop}"/>
+  
+  <property name="module.jdk.home.desktop" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.desktop" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.desktop" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.desktop" value="-encoding UTF-8 -source 8 ${compiler.args}"/>
+  
+  <property name="desktop.output.dir" value="${module.desktop.basedir}/../build/classes/production/desktop"/>
+  <property name="desktop.testoutput.dir" value="${module.desktop.basedir}/../build/classes/test/desktop"/>
+  
+  <path id="desktop.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="desktop.module.production.classpath">
+    <path refid="${module.jdk.classpath.desktop}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-lwjgl/1.0-SNAPSHOT/4031b3eb3285360e67acb39dbd9669558c3abfe6/gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-platform/1.0-SNAPSHOT/dd2a8546ebfc7780cda9c9e6d352abe63595aa08/gdx-platform-1.0-SNAPSHOT-natives-desktop.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.1/aa9aae879af8eb378e22cfc64db56ec2ca9a44d1/lwjgl-platform-2.9.1-natives-linux.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.1/2d12c83fdfbc04ecabf02c7bc8cc54d034f0daac/lwjgl-platform-2.9.1-natives-osx.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.1/4c517eca808522457dd95ee8fc1fbcdbb602efbe/lwjgl-platform-2.9.1-natives-windows.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/net.java.jutils/jutils/1.0.0/e12fe1fda814bd348c1579329c86943d2cd3c6a6/jutils-1.0.0.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput/2.0.5/39c7796b469a600f72380316f6b1f11db6c2c7c4/jinput-2.0.5.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl/2.9.1/f58c5aabcef0e41718a564be9f8e412fff8db847/lwjgl-2.9.1.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.jlayer/jlayer/1.0.1-gdx/7cca83cec5c1b2f011362f4d85aabd71a73b049d/jlayer-1.0.1-gdx.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.jcraft/jorbis/0.0.17/8872d22b293e8f5d7d56ff92be966e6dc28ebdc6/jorbis-0.0.17.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-openal/1.0-SNAPSHOT/45042c6731bab66e602aa5022a730c776eec5451/gdx-openal-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/7ff832a6eb9ab6a767f1ade2b548092d0fa64795/jinput-platform-2.0.5-natives-linux.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/53f9c919f34d2ca9de8c51fc4e1e8282029a9232/jinput-platform-2.0.5-natives-osx.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/385ee093e01f587f30ee1c8a2ee7d408fd732e16/jinput-platform-2.0.5-natives-windows.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl_util/2.9.1/290d7ba8a1bd9566f5ddf16ad06f09af5ec9b20e/lwjgl_util-2.9.1.jar"/>
+    <pathelement location="${core.output.dir}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <path refid="library.com.badlogicgames.gdx:gdx-tools:0.9.9.classpath"/>
+  </path>
+  
+  <path id="desktop.runtime.production.module.classpath">
+    <pathelement location="${desktop.output.dir}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-lwjgl/1.0-SNAPSHOT/4031b3eb3285360e67acb39dbd9669558c3abfe6/gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-platform/1.0-SNAPSHOT/dd2a8546ebfc7780cda9c9e6d352abe63595aa08/gdx-platform-1.0-SNAPSHOT-natives-desktop.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.1/aa9aae879af8eb378e22cfc64db56ec2ca9a44d1/lwjgl-platform-2.9.1-natives-linux.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.1/2d12c83fdfbc04ecabf02c7bc8cc54d034f0daac/lwjgl-platform-2.9.1-natives-osx.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.1/4c517eca808522457dd95ee8fc1fbcdbb602efbe/lwjgl-platform-2.9.1-natives-windows.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/net.java.jutils/jutils/1.0.0/e12fe1fda814bd348c1579329c86943d2cd3c6a6/jutils-1.0.0.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput/2.0.5/39c7796b469a600f72380316f6b1f11db6c2c7c4/jinput-2.0.5.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl/2.9.1/f58c5aabcef0e41718a564be9f8e412fff8db847/lwjgl-2.9.1.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.jlayer/jlayer/1.0.1-gdx/7cca83cec5c1b2f011362f4d85aabd71a73b049d/jlayer-1.0.1-gdx.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.jcraft/jorbis/0.0.17/8872d22b293e8f5d7d56ff92be966e6dc28ebdc6/jorbis-0.0.17.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-openal/1.0-SNAPSHOT/45042c6731bab66e602aa5022a730c776eec5451/gdx-openal-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/7ff832a6eb9ab6a767f1ade2b548092d0fa64795/jinput-platform-2.0.5-natives-linux.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/53f9c919f34d2ca9de8c51fc4e1e8282029a9232/jinput-platform-2.0.5-natives-osx.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/385ee093e01f587f30ee1c8a2ee7d408fd732e16/jinput-platform-2.0.5-natives-windows.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl_util/2.9.1/290d7ba8a1bd9566f5ddf16ad06f09af5ec9b20e/lwjgl_util-2.9.1.jar"/>
+    <path refid="core.runtime.production.module.classpath"/>
+  </path>
+  
+  <path id="desktop.module.classpath">
+    <path refid="${module.jdk.classpath.desktop}"/>
+    <pathelement location="${desktop.output.dir}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-lwjgl/1.0-SNAPSHOT/4031b3eb3285360e67acb39dbd9669558c3abfe6/gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-platform/1.0-SNAPSHOT/dd2a8546ebfc7780cda9c9e6d352abe63595aa08/gdx-platform-1.0-SNAPSHOT-natives-desktop.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.1/aa9aae879af8eb378e22cfc64db56ec2ca9a44d1/lwjgl-platform-2.9.1-natives-linux.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.1/2d12c83fdfbc04ecabf02c7bc8cc54d034f0daac/lwjgl-platform-2.9.1-natives-osx.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.1/4c517eca808522457dd95ee8fc1fbcdbb602efbe/lwjgl-platform-2.9.1-natives-windows.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/net.java.jutils/jutils/1.0.0/e12fe1fda814bd348c1579329c86943d2cd3c6a6/jutils-1.0.0.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput/2.0.5/39c7796b469a600f72380316f6b1f11db6c2c7c4/jinput-2.0.5.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl/2.9.1/f58c5aabcef0e41718a564be9f8e412fff8db847/lwjgl-2.9.1.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.jlayer/jlayer/1.0.1-gdx/7cca83cec5c1b2f011362f4d85aabd71a73b049d/jlayer-1.0.1-gdx.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.jcraft/jorbis/0.0.17/8872d22b293e8f5d7d56ff92be966e6dc28ebdc6/jorbis-0.0.17.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-openal/1.0-SNAPSHOT/45042c6731bab66e602aa5022a730c776eec5451/gdx-openal-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/7ff832a6eb9ab6a767f1ade2b548092d0fa64795/jinput-platform-2.0.5-natives-linux.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/53f9c919f34d2ca9de8c51fc4e1e8282029a9232/jinput-platform-2.0.5-natives-osx.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/385ee093e01f587f30ee1c8a2ee7d408fd732e16/jinput-platform-2.0.5-natives-windows.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl_util/2.9.1/290d7ba8a1bd9566f5ddf16ad06f09af5ec9b20e/lwjgl_util-2.9.1.jar"/>
+    <pathelement location="${core.testoutput.dir}"/>
+    <pathelement location="${core.output.dir}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <path refid="library.com.badlogicgames.gdx:gdx-tools:0.9.9.classpath"/>
+  </path>
+  
+  <path id="desktop.runtime.module.classpath">
+    <pathelement location="${desktop.testoutput.dir}"/>
+    <pathelement location="${desktop.output.dir}"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-lwjgl/1.0-SNAPSHOT/4031b3eb3285360e67acb39dbd9669558c3abfe6/gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-platform/1.0-SNAPSHOT/dd2a8546ebfc7780cda9c9e6d352abe63595aa08/gdx-platform-1.0-SNAPSHOT-natives-desktop.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.0-SNAPSHOT/fd3e4e5dc539b99725fcb4ab2096904e38322bdc/gdx-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.1/aa9aae879af8eb378e22cfc64db56ec2ca9a44d1/lwjgl-platform-2.9.1-natives-linux.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.1/2d12c83fdfbc04ecabf02c7bc8cc54d034f0daac/lwjgl-platform-2.9.1-natives-osx.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.1/4c517eca808522457dd95ee8fc1fbcdbb602efbe/lwjgl-platform-2.9.1-natives-windows.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/net.java.jutils/jutils/1.0.0/e12fe1fda814bd348c1579329c86943d2cd3c6a6/jutils-1.0.0.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput/2.0.5/39c7796b469a600f72380316f6b1f11db6c2c7c4/jinput-2.0.5.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl/2.9.1/f58c5aabcef0e41718a564be9f8e412fff8db847/lwjgl-2.9.1.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.jlayer/jlayer/1.0.1-gdx/7cca83cec5c1b2f011362f4d85aabd71a73b049d/jlayer-1.0.1-gdx.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.jcraft/jorbis/0.0.17/8872d22b293e8f5d7d56ff92be966e6dc28ebdc6/jorbis-0.0.17.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-openal/1.0-SNAPSHOT/45042c6731bab66e602aa5022a730c776eec5451/gdx-openal-1.0-SNAPSHOT.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/7ff832a6eb9ab6a767f1ade2b548092d0fa64795/jinput-platform-2.0.5-natives-linux.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/53f9c919f34d2ca9de8c51fc4e1e8282029a9232/jinput-platform-2.0.5-natives-osx.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/385ee093e01f587f30ee1c8a2ee7d408fd732e16/jinput-platform-2.0.5-natives-windows.jar"/>
+    <pathelement location="C:/Users/Hanto/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl_util/2.9.1/290d7ba8a1bd9566f5ddf16ad06f09af5ec9b20e/lwjgl_util-2.9.1.jar"/>
+    <path refid="core.runtime.module.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.desktop">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.desktop">
+    <patternset refid="excluded.from.module.desktop"/>
+  </patternset>
+  
+  <path id="desktop.module.sourcepath">
+    <dirset dir="${module.desktop.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.desktop" depends="compile.module.desktop.production,compile.module.desktop.tests" description="Compile module desktop"/>
+  
+  <target name="compile.module.desktop.production" depends="register.custom.compilers,compile.module.core" description="Compile module desktop; production classes">
+    <mkdir dir="${desktop.output.dir}"/>
+    <javac2 destdir="${desktop.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.desktop}/javac">
+      <compilerarg line="${compiler.args.desktop}"/>
+      <bootclasspath refid="desktop.module.bootclasspath"/>
+      <classpath refid="desktop.module.production.classpath"/>
+      <src refid="desktop.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.desktop"/>
+    </javac2>
+    
+    <copy todir="${desktop.output.dir}">
+      <fileset dir="${module.desktop.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.desktop.tests" depends="register.custom.compilers,compile.module.desktop.production" description="compile module desktop; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.desktop" description="cleanup module">
+    <delete dir="${desktop.output.dir}"/>
+    <delete dir="${desktop.testoutput.dir}"/>
+  </target>
+</project>
