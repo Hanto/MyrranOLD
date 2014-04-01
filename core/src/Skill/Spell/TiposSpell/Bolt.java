@@ -1,18 +1,19 @@
 package Skill.Spell.TiposSpell;
 // @author Ivan Delgado Huerta
 
-import Constantes.Skills.TipoSpellsData;
+import Actores.Mobs.Proyectil;
 import Graficos.Pixie;
 import Interfaces.Caster;
-import Skill.SkillRecursos;
+import Skill.SkillBook;
 import Skill.SkillStat;
 import Skill.SkillStat.SkillPixie;
+import Skill.Spell.Data.TipoSpellsData;
 import Skill.Spell.Spell;
 import Skill.Spell.TipoSpell;
 import com.badlogic.gdx.math.Vector2;
 
-import static Constantes.Skills.SpellsData.*;
-import static Constantes.Skills.TipoSpellsData.*;
+import static Skill.Spell.Data.SpellsData.*;
+import static Skill.Spell.Data.TipoSpellsData.*;
 
 public class Bolt extends TipoSpell
 {
@@ -32,10 +33,10 @@ public class Bolt extends TipoSpell
         //Siempre que se construya una objeto de tipo Firebolt se inicializan los Stats base que usara:
         //Creamos un array con el tamaño del numero de stats que vamos a introducir:
         skillStats = new SkillStat [4]; SkillStat stat;
-        stat = new SkillStat  (BOLT_CastingTime_String, BOLT_CastingTime_Valor); skillStats[STAT_Cast]=stat;            //CAST
-        stat = new SkillStat            (BOLT_Daño_String, BOLT_Daño_Valor); skillStats[STAT_Daño]=stat;                //DAÑO
-        stat = new SkillStat            (BOLT_Velocidad_String, BOLT_Velocidad_Valor); skillStats[STAT_Velocidad]=stat; //VELOCIDAD
-        stat = new SkillStat            (BOLT_Duracion_String, BOLT_Duracion_Valor); skillStats[STAT_Duracion]=stat;    //DURACION
+        stat = new SkillStat    (BOLT_CastingTime_String, BOLT_CastingTime_Valor);  skillStats[STAT_Cast]=stat; //CAST
+        stat = new SkillStat    (BOLT_Daño_String, BOLT_Daño_Valor);                skillStats[STAT_Daño]=stat; //DAÑO
+        stat = new SkillStat    (BOLT_Velocidad_String, BOLT_Velocidad_Valor); skillStats[STAT_Velocidad]=stat; //VELOCIDAD
+        stat = new SkillStat    (BOLT_Duracion_String, BOLT_Duracion_Valor);    skillStats[STAT_Duracion]=stat; //DURACION
     }
     
     @Override public void inicializarSkillPixies()
@@ -44,14 +45,14 @@ public class Bolt extends TipoSpell
         skilllPixies = new SkillPixie[2];
         SkillStat.SkillPixie spixie = new SkillStat.SkillPixie();
         spixie.tipoAnimacion = "Casteos Bolt";
-        spixie.pixieArray.add(SkillRecursos.listaDePixieCasteos.get(FIREBOLT_Pixie_Casteo));
-        spixie.pixieArray.add(SkillRecursos.listaDePixieCasteos.get(FROSTBOLT_Pixie_Casteo));
+        spixie.pixieArray.add(SkillBook.get().listaDePixieCasteos.get(FIREBOLT_Pixie_Casteo));
+        spixie.pixieArray.add(SkillBook.get().listaDePixieCasteos.get(FROSTBOLT_Pixie_Casteo));
         skilllPixies[PIXIE_Casteos]=spixie;
         
         spixie = new SkillPixie(); 
         spixie.tipoAnimacion = "Proyectiles Bolt";
-        spixie.pixieArray.add(SkillRecursos.listaDePixieProyectiles.get(FIREBOLT_Pixie_Proyectil));
-        spixie.pixieArray.add(SkillRecursos.listaDePixieProyectiles.get(FROSTBOLT_Pixie_Proyectil));
+        spixie.pixieArray.add(SkillBook.get().listaDePixieProyectiles.get(FIREBOLT_Pixie_Proyectil));
+        spixie.pixieArray.add(SkillBook.get().listaDePixieProyectiles.get(FROSTBOLT_Pixie_Proyectil));
         skilllPixies[PIXIE_Proyectiles]=spixie;
     }
     
@@ -74,7 +75,7 @@ public class Bolt extends TipoSpell
         direccion = calcularDireccion(origen, destino);
         
         //Creamos la entidad proyectil e inicializamos sus datos:
-        Actores.Mobs.Proyectil pepo = new Actores.Mobs.Proyectil(proyectil);
+        Proyectil pepo = new Proyectil(proyectil);
         pepo.setSpell(spell);
         pepo.setPosition(origen.x, origen.y);
         pepo.setDireccion(direccion);

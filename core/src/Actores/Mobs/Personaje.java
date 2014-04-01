@@ -27,7 +27,7 @@ public class Personaje extends Mob implements Vulnerable, Debuffeable, Caster, N
     protected int maxHPs=1000;
     
     protected String spellSeleccionado = "";
-    protected int terrenoSeleccionado = 0;
+    protected String terrenoSeleccionado = "";
     protected int capaTerrenoSeleccionada = 0;
     
     public boolean isCasteando = false;
@@ -48,7 +48,7 @@ public class Personaje extends Mob implements Vulnerable, Debuffeable, Caster, N
     public float getActualCastingTime ()                    { return actualCastingTime; }
     public float getTotalCastingTime ()                     { return totalCastingTime; }
     public String getSpellSeleccionado ()                   { return spellSeleccionado; }
-    public int getTerrenoSeleccionado ()                    { return terrenoSeleccionado; }
+    public String getTerrenoSeleccionado ()                 { return terrenoSeleccionado; }
     //SET
     public void setNombre(String s)                         { nombre = s; }
     public void setMaxHPs (int i)                           { maxHPs = i; }
@@ -57,7 +57,7 @@ public class Personaje extends Mob implements Vulnerable, Debuffeable, Caster, N
     public void setTotalCastingTime (float i)               { totalCastingTime = i; }
     public void setCastingTime (float actual, float total)  { actualCastingTime = actual; totalCastingTime = total;}
     public void setSpellSeleccionado (String spellID)       { spellSeleccionado = spellID; }
-    public void setTerrenoSeleccionado (int terrenoID)      { terrenoSeleccionado = terrenoID; }
+    public void setTerrenoSeleccionado (String terrenoID)   { terrenoSeleccionado = terrenoID; }
     public void setCapaTerrenoSelecionada (int capaTerreno) { capaTerrenoSeleccionada = capaTerreno; }
         
     public void setActualHPs (int i)                        

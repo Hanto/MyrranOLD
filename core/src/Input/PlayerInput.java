@@ -2,8 +2,9 @@ package Input;
 // @author Ivan Delgado Huerta
 
 import Main.Mundo;
-import UI.BarraSpells;
-import UI.BarraTerrenos;
+import UI.Elementos.BarraSpells;
+import UI.Elementos.BarraTerrenos;
+import UI.UIBook;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
@@ -15,7 +16,8 @@ public class PlayerInput implements InputProcessor
     @Override
     public boolean keyDown(int keycode) 
     {
-        BarraSpells barraspells = Mundo.player.barraSpells;
+        BarraSpells barraspells = UIBook.get().getBarraSpells();
+        BarraTerrenos barraTerrenos = UIBook.get().getBarraTerrenos();
                 
         for (int i=0;i<barraspells.barra.size;i++)
         { if (barraspells.barra.get(i).keycode == keycode) 
@@ -29,7 +31,7 @@ public class PlayerInput implements InputProcessor
                 barraspells.actualizarApariencia(antiguoSpellSeleccionado);
                 //Si seleccionamos el spell EditarTerreno tenemos que mostrar la barra de Terrenos:
                 //Y si seleccionamos otro spell y la barra esta mostrada, hay que ocultarla:
-                BarraTerrenos.mostrarOcultarBarraTerreno();
+                barraTerrenos.mostrarOcultarBarraTerreno();
             }                                               
         }
         

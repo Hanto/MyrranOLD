@@ -1,7 +1,7 @@
 package Skill.Spell.TiposSpell;
 // @author Ivan Delgado Huerta
 
-import Constantes.Skills.TipoSpellsData;
+import Skill.Spell.Data.TipoSpellsData;
 import Interfaces.Caster;
 import Interfaces.Debuffeable;
 import Interfaces.Vulnerable;

@@ -1,32 +1,29 @@
 package Pantallas;// Created by Hanto on 28/03/2014.
 
-import Constantes.LoadRecursos;
-import Constantes.LoadSkills;
 import Constantes.MiscData;
-import Constantes.Skills.SpellsData;
-import Geo.Celda;
-import Geo.Mapa;
-import Geo.Muro;
+import Geo.GeoBook;
+import Geo.Mapa.Celdas.Muro;
+import Geo.Mapa.MVC.MapaModel;
+import Geo.Mapa.MVC.MapaControlador;
 import Graficos.PixieArbol;
 import Graficos.Texto;
 import Main.Mundo;
 import Resources.Recursos;
 import Save.SaveData;
 import Skill.SkillBook;
+import Skill.Spell.Data.SpellsData;
+import UI.UIBook;
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
 import com.Myrran.Myrran;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 import java.util.Comparator;
@@ -36,9 +33,17 @@ import static Main.Mundo.player;
 public class PantallaJuego extends AbstractPantalla
 {
     private Texto fps;
-    private PointLight luzPlayer;
-    private Stage stageMundo = new Stage();
+
+    private Stage stageMundo;
+
+    //private MapaView mapaView;
+    private MapaControlador mapaControlador;
+    private OrthogonalTiledMapRenderer mapRenderer;
+
+    private World world;
     private RayHandler rayHandler;
+    private PointLight luzPlayer;
+
 
     static class ComparatorActor implements Comparator<Actor>
     {
@@ -61,39 +66,52 @@ public class PantallaJuego extends AbstractPantalla
     {
         super (game);
 
+        //Creacion entidades PantallaJuego:
+        stageMundo = new Stage();
+        world = new World(new Vector2(0, -9.8f), false);
+        rayHandler = new RayHandler (world);
+        luzPlayer = new PointLight(rayHandler, 300, new Color(0.3f,0.3f,0.3f,1.0f), 350, 0, 0);
+
+        //Carga Recursos y Datos:
+        Recursos.crearRecursos();
+        SkillBook.get().inicializar(Recursos.atlas);
+        GeoBook.get().inicializar(Recursos.atlas);
+        UIBook.get().inicializar(stageUI);
+
+        Mundo.get().setStageMundo(stageMundo);
+        Mundo.get().setWorld(world);
+        Mundo.get().setRayHandler(rayHandler);
+        player = Mundo.get().añadirPlayer(0, 0, 0, "Hanto");
+        player.setPosition(500, 400);
+
+
+        //Inicializacion Entidades:
         inputMultiplexer.addProcessor(stageMundo);
-
-        Mundo.world = new World(new Vector2(0, -9.8f), false);
-
+        stageMundo.getViewport().setCamera(camara);
         RayHandler.useDiffuseLight(true);
-        rayHandler = new RayHandler (Mundo.world);
         rayHandler.setCombinedMatrix(camara.combined);
         rayHandler.setAmbientLight(0.4f, 0.4f, 0.4f, 1.0f);
         //luz = new PointLight(rayHandler, 100, new Color(1,1,1,0.7f), 150, 0, 0);
-        luzPlayer = new PointLight(rayHandler, 300, new Color(0.3f,0.3f,0.3f,1.0f), 350, 0, 0);
+        MapaModel mapaModel = SaveData.loadMap("mapaInicial");
+        if (mapaModel == null) mapaModel = new MapaModel("mapaInicial");
+        mapaControlador = new MapaControlador(mapaModel);
+        mapRenderer = new OrthogonalTiledMapRenderer(mapaControlador.getMapaView());
 
-        Mundo.getMundo().setStageMundo(stageMundo);
-        Mundo.getMundo().setRayHandler(rayHandler);
+
+        GeoBook.get().setMapaControlador(mapaControlador);
+
+    }
 
 
-        Recursos.crearRecursos();
-        LoadRecursos.cargarRecursos();
+    @Override public void show ()
+    {
+        super.show();
 
-        crearMapa();
-        LoadSkills.LoadAll();
-
-        Mapa.renderGrid = false;
-        Mapa.crearTiledMap();
-
-        player = Mundo.getMundo().añadirPlayer(0, 0, 0, "Hanto", stageUI);
-        player.setStageUI(this.stageUI);
-        player.setPosition(500, 400);
-
-        player.barraSpells.setSkill(0, SkillBook.listaDeSpells.get(SpellsData.FIREBOLT_ID));
-        player.barraSpells.setSkill(1, SkillBook.listaDeSpells.get(SpellsData.FROSTBOLT_ID));
-        player.barraSpells.setSkill(2, SkillBook.listaDeSpells.get(SpellsData.MUROFORMAR_ID));
-        player.barraSpells.setSkill(3, SkillBook.listaDeSpells.get(SpellsData.TERRAFORMAR_ID));
-        player.barraSpells.setSkill(4, SkillBook.listaDeSpells.get(SpellsData.INSTAHEAL_ID));
+        UIBook.get().getBarraSpells().setSkill(0, SkillBook.get().listaDeSpells.get(SpellsData.FIREBOLT_ID));
+        UIBook.get().getBarraSpells().setSkill(1, SkillBook.get().listaDeSpells.get(SpellsData.FROSTBOLT_ID));
+        UIBook.get().getBarraSpells().setSkill(2, SkillBook.get().listaDeSpells.get(SpellsData.MUROFORMAR_ID));
+        UIBook.get().getBarraSpells().setSkill(3, SkillBook.get().listaDeSpells.get(SpellsData.TERRAFORMAR_ID));
+        UIBook.get().getBarraSpells().setSkill(4, SkillBook.get().listaDeSpells.get(SpellsData.INSTAHEAL_ID));
 
         player.setActualHPs(1);
 
@@ -134,22 +152,6 @@ public class PantallaJuego extends AbstractPantalla
 
         fps = new Graficos.Texto("fps", Recursos.font14, Color.WHITE, Color.BLACK, 0, 0, Align.left, Align.bottom, 2);
         stageUI.addActor(fps);
-
-        Mundo.getMundo().getBarraTerrenos().setNumColumnas(2);
-
-        Texture texture = new Texture(Gdx.files.internal("Images/Spell Icons/Espectro.png"));
-        Image espectro = new Image(texture);
-        stageUI.addActor(espectro);
-
-        espectro.addAction(Actions.addAction(Actions.moveTo(100, 100, 3f, Interpolation.elastic)));
-
-        stageMundo.getViewport().setCamera(camara);
-    }
-
-
-    @Override public void show ()
-    {
-        super.show();
     }
 
     @Override public void render (float delta)
@@ -168,15 +170,13 @@ public class PantallaJuego extends AbstractPantalla
         camara.update();
         batch.setProjectionMatrix(camara.combined);
         rayHandler.setCombinedMatrix(camara.combined);
-        Mundo.mapRenderer.setView(camara);
-
-
+        mapRenderer.setView(camara);
 
         batch.begin();
 
         batch.end();
 
-        Mundo.mapRenderer.render();
+        mapRenderer.render();
         stageMundo.act(delta);
         stageMundo.draw();
 
@@ -203,44 +203,45 @@ public class PantallaJuego extends AbstractPantalla
 
         if (stageMundo != null) stageMundo.dispose();
         if (rayHandler != null) rayHandler.dispose();
-        if (Mundo.tiledMap != null) Mundo.tiledMap.dispose();
-        if (Mundo.mapRenderer != null) Mundo.mapRenderer.dispose();
-        if (Mundo.world != null) Mundo.world.dispose();
+        if (mapaControlador.getMapaView() != null) mapaControlador.getMapaView().dispose();
+        if (mapRenderer != null) mapRenderer.dispose();
+        if (world != null) world.dispose();
 
         Recursos.liberarRecursos();
     }
-
-    private void crearMapa()
+/*
+    private void crearMapa(Celda[][] mapa)
     {
         for (int x = 0; x < MiscData.MAPA_Max_X; x++)
         {
             for (int y = 0; y < MiscData.MAPA_Max_Y; y++)
             {
                 Celda celda = new Celda();
-                celda.getTerrenoID()[0]=0;
-                Mundo.mapa[x][y]=celda;
+                celda.getTerrenoID()[0]= TerrenosData.T001_ID;
+                mapa[x][y]=celda;
             }
         }
 
-        SaveData.loadMap();
+        SaveData.loadMap("mapaInicial.bin");
 
         Muro muro;
-        int muroID;
+        String muroID;
 
         for (int x = 0; x < MiscData.MAPA_Max_X; x++)
         {
             for (int y = 0; y < MiscData.MAPA_Max_Y; y++)
             {
-                muroID = Mundo.mapa[x][y].getMuroID();
-                if (muroID >=0)
+                muroID = Mundo.get().getMapaView().map[x][y].getMuroID();
+                if (muroID.length() >0)
                 {
-                    muro = new Muro(Mundo.listaDeMuros.get(muroID));
-                    stageMundo.addActor(muro);
+                    muro = new Muro(GeoBook.get().listaDeMuros.get(muroID));
                     muro.setPosition(x*MiscData.TILESIZE, y*MiscData.TILESIZE);
+                    muro.crearMuro(stageMundo, world, player.getActor());
+
                 }
             }
         }
-    }
+    }*/
 
     public void modoEntrelazado ()
     {

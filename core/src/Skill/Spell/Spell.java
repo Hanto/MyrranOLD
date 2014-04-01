@@ -5,7 +5,6 @@ import Interfaces.Caster;
 import Interfaces.Debuffeable;
 import Skill.Aura.Aura;
 import Skill.SkillBook;
-import Skill.SkillRecursos;
 import Skill.SkillStat;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
@@ -28,7 +27,7 @@ public class Spell
     public void setNombre (String nombre)               { this.nombre = nombre; }
     public void setDescripcion (String descripcion)     { this.descripcion = descripcion; }
     public void setIcono (TextureRegion texture)        { icono = texture; }
-    public void setIcono (String iconoID)               { icono = SkillRecursos.listaDeSpellIconos.get(iconoID); }
+    public void setIcono (String iconoID)               { icono = SkillBook.get().listaDeSpellIconos.get(iconoID); }
     //GET:
     public String getId ()                              { return id; }
     public String getNombre ()                          { return nombre; }
@@ -77,6 +76,6 @@ public class Spell
     
     public void aplicarAuras (Caster caster, Debuffeable target)
     {   for (int i=0;i<listaDeAurasQueAplica.size;i++)
-        {   SkillBook.listaDeAuras.get(listaDeAurasQueAplica.get(i)).aplicarAura(caster, target); }
+        {   SkillBook.get().listaDeAuras.get(listaDeAurasQueAplica.get(i)).aplicarAura(caster, target); }
     }
 }

@@ -3,21 +3,21 @@ atlas.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-Arboles/BolaGrandeArbol2
+Arboles/BolaGrande2
   rotate: false
   xy: 2, 85
   size: 477, 167
   orig: 477, 167
   offset: 0, 0
   index: -1
-Arboles/BolaMedianaArbol2
+Arboles/BolaMediana2
   rotate: false
   xy: 2, 2
   size: 282, 81
   orig: 282, 81
   offset: 0, 0
   index: -1
-Arboles/Bolapequeñaarbol2
+Arboles/Bolapequenya2
   rotate: false
   xy: 286, 26
   size: 162, 57
@@ -295,6 +295,32 @@ atlas9.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+Muros/MuroBase
+  rotate: false
+  xy: 28, 5
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+Muros/MuroMedio
+  rotate: false
+  xy: 54, 5
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+Muros/MuroTecho
+  rotate: false
+  xy: 2, 2
+  size: 24, 27
+  orig: 24, 27
+  offset: 0, 0
+  index: -1
+
+atlas10.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
 NPC Sprites/GlowingSpectre
   rotate: false
   xy: 2, 262
@@ -317,7 +343,7 @@ NPC Sprites/Momia
   offset: 0, 0
   index: -1
 
-atlas10.png
+atlas11.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -392,7 +418,7 @@ Player Sprites/Sombra
   offset: 0, 0
   index: -1
 
-atlas11.png
+atlas12.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -467,7 +493,7 @@ Spell Icons/PoisonBolt
   offset: 0, 0
   index: -1
 
-atlas12.png
+atlas13.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -535,159 +561,138 @@ Spell Sprites/SpellBalls_04n
   offset: 0, 0
   index: -1
 
-atlas13.png
+atlas14.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 Terrenos/Arena1
   rotate: false
-  xy: 2, 31
+  xy: 2, 28
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
   index: -1
 Terrenos/Baldosas1
   rotate: false
-  xy: 198, 177
+  xy: 198, 174
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
   index: -1
 Terrenos/Baldosas2
   rotate: false
-  xy: 52, 31
+  xy: 52, 28
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
   index: -1
 Terrenos/Baldosas3
   rotate: false
-  xy: 248, 177
+  xy: 248, 174
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
   index: -1
 Terrenos/Cesped.OLD
   rotate: false
-  xy: 2, 105
+  xy: 2, 102
   size: 96, 144
   orig: 96, 144
   offset: 0, 0
   index: -1
 Terrenos/Cesped1
   rotate: false
-  xy: 102, 31
+  xy: 102, 28
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
   index: -1
 Terrenos/Cesped2
   rotate: false
-  xy: 298, 177
+  xy: 298, 174
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
   index: -1
 Terrenos/Cesped4
   rotate: false
-  xy: 298, 177
+  xy: 298, 174
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
   index: -1
 Terrenos/Cesped2.OLD
   rotate: false
-  xy: 100, 105
+  xy: 100, 102
   size: 96, 144
   orig: 96, 144
   offset: 0, 0
   index: -1
 Terrenos/Cesped3
   rotate: false
-  xy: 348, 177
+  xy: 348, 174
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
   index: -1
 Terrenos/Cesped5
   rotate: false
-  xy: 398, 177
+  xy: 398, 174
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
   index: -1
-Terrenos/MuroBase
-  rotate: false
-  xy: 152, 79
-  size: 24, 24
-  orig: 24, 24
-  offset: 0, 0
-  index: -1
-Terrenos/MuroMedio
-  rotate: false
-  xy: 448, 151
-  size: 24, 24
-  orig: 24, 24
-  offset: 0, 0
-  index: -1
-Terrenos/MuroTecho
-  rotate: false
-  xy: 2, 2
-  size: 24, 27
-  orig: 24, 27
-  offset: 0, 0
-  index: -1
 Terrenos/Suelo
   rotate: false
-  xy: 348, 127
+  xy: 348, 124
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Terrenos/Suelo2
   rotate: false
-  xy: 398, 127
+  xy: 398, 124
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Terrenos/Tierra1
   rotate: false
-  xy: 448, 177
+  xy: 448, 174
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
   index: -1
 Terrenos/Tierra2
   rotate: false
-  xy: 198, 103
+  xy: 198, 100
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
   index: -1
 Terrenos/Tierra3
   rotate: false
-  xy: 248, 103
+  xy: 248, 100
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
   index: -1
 Terrenos/Tierra4
   rotate: false
-  xy: 298, 103
+  xy: 298, 100
   size: 48, 72
   orig: 48, 72
   offset: 0, 0
   index: -1
 Terrenos/grid
   rotate: false
-  xy: 28, 5
+  xy: 2, 2
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 
-atlas14.png
+atlas15.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none

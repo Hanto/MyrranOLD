@@ -2,18 +2,12 @@ package Actores.Mobs.Personajes.PCs;
 import Actores.Mobs.Personajes.PC;
 import Constantes.MiscData;
 import MobileEstados.Player.PlayerEstado;
-import UI.BarraSpells;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 
 //* @author Ivan Delgado Huerta
 // Player representa de todos los personajes controlados por el jugador, el que esta siendo usado localmente desde esta maquina
 public class Player extends PC
 {
-    public BarraSpells barraSpells = new BarraSpells(2, 9);
-    private Stage stageUI;                                                          //Stage del UI en el que mostrar Informacion al Player
-
-    public boolean mostrarBarraTerrenos = false;
     public int nivelDeZoom = 0;
     
     protected PlayerEstado estado;
@@ -37,13 +31,10 @@ public class Player extends PC
     protected int teclaDerecha = Keys.D;
     
     public void procesarInput()                 { estado.procesarInput(); }
-    public void setStageUI (Stage stage)        { stageUI = stage; }
-    public Stage getStageUI ()                  { return stageUI; }
     
     //CONSTRUCTOR:
-    public Player(final int numRaza, int posX, int posY, String nombre, Stage stageUI)
+    public Player(final int numRaza, int posX, int posY, String nombre)
     {   super(numRaza, nombre);
-        this.stageUI = stageUI;
         inicializar (posX, posY);
         estado = new PlayerEstado(this);
     }
@@ -51,8 +42,6 @@ public class Player extends PC
     private void inicializar (int posX, int posY)
     {   velocidadMax = MiscData.PLAYER_VelocidadMax_Pixeles_Sec;
         setPosition (posX, posY);
-        barraSpells.setPosition(MiscData.WINDOW_Horizontal_Resolution/2-barraSpells.getWidth()/2, 5);
-        stageUI.addActor(barraSpells);
     }
     
     public void setPosition (float X, float Y)

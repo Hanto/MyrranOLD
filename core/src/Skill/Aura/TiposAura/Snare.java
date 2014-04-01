@@ -1,6 +1,6 @@
 package Skill.Aura.TiposAura;// Created by Hanto on 27/03/2014.
 
-import Constantes.Skills.TipoAurasData;
+import Skill.Aura.Data.TipoAurasData;
 import Skill.Aura.BDebuff;
 import Skill.Aura.TipoAura;
 import Skill.SkillStat;

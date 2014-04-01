@@ -2,7 +2,7 @@ package Skill.Aura.TiposAura;
 // @author Ivan Delgado Huerta
 
 import Constantes.MiscData;
-import Constantes.Skills.TipoAurasData;
+import Skill.Aura.Data.TipoAurasData;
 import Interfaces.Vulnerable;
 import Skill.Aura.BDebuff;
 import Skill.Aura.TipoAura;

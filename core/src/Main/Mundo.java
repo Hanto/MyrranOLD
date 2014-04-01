@@ -2,56 +2,42 @@ package Main;
 
 import Actores.Mobs.Personajes.PCs.Player;
 import Actores.Mobs.Proyectil;
-import Constantes.MiscData;
-import Geo.Celda;
-import Geo.Muro;
-import Geo.Terreno;
+import Geo.Mapa.MVC.MapaView;
 import Skill.Aura.BDebuff;
-import UI.BarraTerrenos;
 import box2dLight.RayHandler;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
-
-import static Resources.Recursos.atlas;
  //* @author Ivan Delgado Huerta
 
 //SINGLETON PATTERN:
 public class Mundo
 {
+    private volatile static Mundo mundo;
+
     public static Player player;
-    public static Array<Terreno> listaDeTerrenos = new Array<>();
-    public static Array<Muro> listaDeMuros = new Array<>();
     public static Array<Player> listaDePlayers = new Array<>();
     public static Array<Proyectil> listaDeProyectiles = new Array<>();
-    public static Celda[][] mapa = new Celda[MiscData.MAPA_Max_X][MiscData.MAPA_Max_Y];
-    public static TiledMap tiledMap = new TiledMap();
-    public static OrthogonalTiledMapRenderer mapRenderer;
-    public static World world;
 
-
-
-    private volatile static Mundo mundo;
     private Stage stageMundo;
-
-    private BarraTerrenos barraTerrenos;
     private RayHandler rayHandler;
+    private World world;
+    private MapaView mapaView;
 
     public void setStageMundo (Stage stage)             { stageMundo = stage; }
+    public void setWorld (World w)                      { world = w; }
     public void setRayHandler (RayHandler ray)          { rayHandler = ray; }
-    public void setBarraTerrenos (BarraTerrenos barra)  { barraTerrenos = barra; }
+    public void setMapaView(MapaView map)                      { mapaView = map; }
+
     public Stage getStageMundo ()                       { return stageMundo; }
     public RayHandler getRayHandler ()                  { return rayHandler; }
-    public BarraTerrenos getBarraTerrenos ()            { return barraTerrenos; }
+    public World getWorld ()                            { return world; }
+    public MapaView getMapaView()                              { return mapaView; }
 
-    private Mundo ()                                    { }
 
     //Singleton Pattern:
-    public static Mundo getMundo ()
+    private Mundo ()                                    { }
+    public static Mundo get()
     {
         if (mundo == null)
         synchronized (Mundo.class)
@@ -62,9 +48,9 @@ public class Mundo
         return mundo;
     }
 
-    public Player añadirPlayer (int numRaza, int posX, int posY, String nombre, Stage stageUI)
+    public Player añadirPlayer (int numRaza, int posX, int posY, String nombre)
     {
-        Player pc = new Player(0, posX, posY, nombre, stageUI);
+        Player pc = new Player(0, posX, posY, nombre);
         Mundo.listaDePlayers.add(pc);
         stageMundo.addActor(pc.getActor());
         return pc;
@@ -104,23 +90,5 @@ public class Mundo
             for (int j=0; j<listaDeAuras.size;j++)
             {   listaDeAuras.get(j).actualizarDebuff(); }
         }
-    }
-    
-    public static void añadirTerreno (String nombreTerreno)
-    {
-        Terreno terreno = new Terreno();
-        terreno.setNombre(nombreTerreno);
-        terreno.setTextura(nombreTerreno);
-        terreno.setColor(Color.GRAY);
-        Mundo.listaDeTerrenos.add(terreno);
-    }
-    
-    public static void añadirMuro (String muroBase, String muroMedio, String muroTecho)
-    {
-        TextureRegion muroBaseTex = new TextureRegion(atlas.findRegion(MiscData.ATLAS_Terrenos_LOC+muroBase));
-        TextureRegion muroMedioTex = new TextureRegion(atlas.findRegion(MiscData.ATLAS_Terrenos_LOC+muroMedio));
-        TextureRegion muroTechoTex = new TextureRegion(atlas.findRegion(MiscData.ATLAS_Terrenos_LOC+muroTecho));
-        Muro muro = new Muro(muroBaseTex, muroMedioTex, muroTechoTex);
-        Mundo.listaDeMuros.add(muro);
     }
 }

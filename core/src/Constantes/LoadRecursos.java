@@ -5,10 +5,7 @@
 package Constantes;
 // @author Ivan Delgado Huerta
 
-import Main.Mundo;
 import Resources.Recursos;
-import Skill.SkillRecursos;
-import UI.BarraTerrenos;
 
 public class LoadRecursos 
 {
@@ -41,43 +38,8 @@ public class LoadRecursos
         
         //ARBOLES:
         Recursos.salvarTronco("Tronco2", -50, 50, -45, 65, 40, 65);
-        Recursos.salvarCopa("BolaGrandeArbol2");
-        Recursos.salvarCopa("BolaMedianaArbol2");
-        Recursos.salvarCopa("Bolapequeñaarbol2");
-
-        //SPELLS:
-        //SpellPixies:
-        SkillRecursos.setAtlas(Recursos.atlas);
-        SkillRecursos.salvarCasteo("Fireball01");
-        SkillRecursos.salvarEfectoDeSpell("Fireball02");
-        SkillRecursos.salvarCasteo("FrostBolt01");
-        SkillRecursos.salvarEfectoDeSpell("FrostBolt02");
-        //SpellIconos:
-        SkillRecursos.salvarIconoSpell("FireBall");
-        SkillRecursos.salvarIconoSpell("FrostBolt");
-        SkillRecursos.salvarIconoSpell("Editar");
-        SkillRecursos.salvarIconoSpell("Muros");
-        //AuraIconos:
-        SkillRecursos.salvarIconoAura("Dot");
-        SkillRecursos.salvarIconoAura("Hot");
-        SkillRecursos.salvarIconoAura("Snare");
-
-        //TERRENOS:
-        Mundo.añadirTerreno("Tierra4");
-        Mundo.añadirTerreno("Tierra3");
-        Mundo.añadirTerreno("Tierra1");
-        Mundo.añadirTerreno("Tierra2");
-        Mundo.añadirTerreno("Cesped1");
-        Mundo.añadirTerreno("Cesped2");
-        Mundo.añadirTerreno("Cesped3");
-        Mundo.añadirTerreno("Baldosas3");
-        Mundo.añadirTerreno("Baldosas1");
-        Mundo.añadirTerreno("Baldosas2");
-        Mundo.añadirTerreno("Arena1");
-
-        Mundo.getMundo().setBarraTerrenos(new BarraTerrenos());
-        
-        //MUROS:
-        Mundo.añadirMuro("MuroBase", "MuroMedio", "MuroTecho");
+        Recursos.salvarCopa("BolaGrande2");
+        Recursos.salvarCopa("BolaMediana2");
+        Recursos.salvarCopa("Bolapequenya2");
     }
 }

@@ -14,8 +14,8 @@ public abstract class AbstractPEstado implements Estado
     {
         Player player = playerE.player;
         if (player.castear && !player.isCasteando && player.getSpellSeleccionado().length() > 0)
-        {   
-            SkillBook.listaDeSpells.get(player.getSpellSeleccionado()).castear(player, Gdx.input.getX(), Gdx.input.getY());
+        {
+            SkillBook.get().listaDeSpells.get(player.getSpellSeleccionado()).castear(player, Gdx.input.getX(), Gdx.input.getY());
         }
     }
     

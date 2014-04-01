@@ -25,7 +25,7 @@
     </orderEntry>
     <orderEntry type="library" name="com.badlogicgames.gdx:gdx-tools:0.9.9" level="project" />
     <orderEntry type="library" name="Box2DLights" level="project" />
-    <orderEntry type="library" name="KryoNet" level="project" />
+    <orderEntry type="library" name="com.esotericsoftware.kryo:kryo:2.23.0" level="project" />
   </component>
 </module>
 

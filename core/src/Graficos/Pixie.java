@@ -52,7 +52,7 @@ public class Pixie extends Actor
     public void setOffset (int X, int Y)                                { Offset.set(X, Y); }
     
     //CONSTRUCTOR PARA ANIMACIONES:
-    //texture: es la textura que contiene el mapa con todas las animaciones
+    //texture: es la textura que contiene el matriz con todas las animaciones
     //filas, numCols: es el numero de numFilas y numCols que tiene la textura
     
     public Pixie(TextureRegion texture, int filas, int columnas)
@@ -69,7 +69,7 @@ public class Pixie extends Actor
     }
     
     //CONSTRUCTOR PARA ANIMACIONES:
-    //texture: es la textura que contiene el mapa con todas las animaciones
+    //texture: es la textura que contiene el matriz con todas las animaciones
     //filas, numCols: es el numero de numFilas y numCols que tiene la textura
     //numFramesAnimacion: es el numero de frames que tiene cada animacion, por si en una fila hay varias animaciones juntas
     //duracionFrame: Tiempo que se muestra cada frame

@@ -42,11 +42,11 @@ public class Proyectil extends Mob
         this.pixie.setOrigin(pixie.getWidth()/2, pixie.getHeight()/2);
         this.pixie.setColor(0, 0, 0, 0);
         this.pixie.addAction(Actions.fadeIn(0.1f));
-        luz = new PointLight(Mundo.getMundo().getRayHandler(), 100, new Color(1,0.5f,0.5f,0.4f), 200, 0, 0);
+        luz = new PointLight(Mundo.get().getRayHandler(), 100, new Color(1,0.5f,0.5f,0.4f), 200, 0, 0);
     }
     
-    public void expirar ()                                  { luz.remove(); Mundo.getMundo().eliminarProyectil(this); }
-    public void crear ()                                    { Mundo.getMundo().añadirProyectil(this);  }
+    public void expirar ()                                  { luz.remove(); Mundo.get().eliminarProyectil(this); }
+    public void crear ()                                    { Mundo.get().añadirProyectil(this);  }
     public void consumirse(float delta)
     {
         duracionActual = duracionActual + delta;

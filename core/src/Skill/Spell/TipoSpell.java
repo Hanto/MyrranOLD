@@ -5,7 +5,7 @@ import Constantes.MiscData;
 import Graficos.Pixie;
 import Interfaces.Caster;
 import Pantallas.PantallaJuego;
-import Skill.SkillRecursos;
+import Skill.SkillBook;
 import Skill.SkillStat;
 import Skill.SkillStat.SkillPixie;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -31,7 +31,7 @@ public abstract class TipoSpell implements TipoSpellInterface
     public void setNombre (String nombre)               { this.nombre = nombre; }
     public void setDescripcion (String descripcion)     { this.descripcion = descripcion; }
     public void setIcono (TextureRegion texture)        { icono = texture; }
-    public void setIcono (String iconoID)               { icono = SkillRecursos.listaDeSpellIconos.get(iconoID); }
+    public void setIcono (String iconoID)               { icono = SkillBook.get().listaDeSpellIconos.get(iconoID); }
     //GET
     public String getID()                               { return id; }
     public String getNombre()                           { return nombre; }

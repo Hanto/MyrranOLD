@@ -1,5 +1,6 @@
 package Resources;
 
+import Constantes.LoadRecursos;
 import Constantes.MiscData;
 import Graficos.Pixie;
 import com.badlogic.gdx.Gdx;
@@ -59,18 +60,15 @@ public class Recursos
     public static TextureRegion botonBorrarTerreno;
     public static TextureRegion spellSeleccionado;
     
-    public static TextureRegion muroBase;
-    public static TextureRegion muroMedio;
-    public static TextureRegion muroTecho;
-    
     public static Pixie polvoPasos;
     
     
     public static void crearRecursos()
     {
         crearAtlas();
-        
-        sombraPlayer = new TextureRegion(Recursos.atlas.findRegion(MiscData.ATLAS_PlayerSprites_LOC+"Sombra"));
+        LoadRecursos.cargarRecursos();
+
+        sombraPlayer = new TextureRegion(Recursos.atlas.findRegion(MiscData.ATLAS_PlayerSprites_LOC + "Sombra"));
         nameplateTotal = new TextureRegion(Recursos.atlas.findRegion(MiscData.ATLAS_PlayerSprites_LOC+"Nameplate"));
         nameplateActual = new TextureRegion(Recursos.atlas.findRegion(MiscData.ATLAS_PlayerSprites_LOC+"NameplateFondo"));
         troncon = new Image(Recursos.atlas.findRegion(MiscData.ATLAS_Arboles_LOC+"Tronco1"));
@@ -82,9 +80,6 @@ public class Recursos
         casillero = new TextureRegion(Recursos.atlas.findRegion(MiscData.ATLAS_UI_LOC+"Casillero"));
         rebindButtonOn = new TextureRegion(Recursos.atlas.findRegion(MiscData.ATLAS_UI_LOC+"RebindOn"));
         rebindButtonOff = new TextureRegion(Recursos.atlas.findRegion(MiscData.ATLAS_UI_LOC+"RebindOff"));
-        muroBase = new TextureRegion(Recursos.atlas.findRegion(MiscData.ATLAS_Terrenos_LOC+"MuroBase"));
-        muroMedio = new TextureRegion(Recursos.atlas.findRegion(MiscData.ATLAS_Terrenos_LOC+"MuroMedio"));
-        muroTecho = new TextureRegion(Recursos.atlas.findRegion(MiscData.ATLAS_Terrenos_LOC+"MuroTecho"));
         botonBorrarTerreno = new TextureRegion(Recursos.atlas.findRegion(MiscData.ATLAS_UI_LOC+"Borrar"));
         spellSeleccionado = new TextureRegion(Recursos.atlas.findRegion(MiscData.ATLAS_UI_LOC+"Select"));
         
@@ -350,5 +345,6 @@ public class Recursos
     {
         if (atlas != null) atlas.dispose();
         if (font14 != null) font14.dispose();
+        if (font8 != null) font8.dispose();
     }
 }
