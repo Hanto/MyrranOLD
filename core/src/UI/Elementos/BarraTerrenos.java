@@ -70,7 +70,7 @@ public class BarraTerrenos extends Group
             {
                 @Override public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
                 {
-                    Mundo.player.setTerrenoSeleccionado(casilla.terrenoID);
+                    Mundo.get().player.setTerrenoSeleccionado(casilla.terrenoID);
                     return true;
                 }
             });   
@@ -105,8 +105,8 @@ public class BarraTerrenos extends Group
             botonCapas[i].addListener(new InputListener()
             {
                 @Override public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
-                {   
-                    Mundo.player.setCapaTerrenoSelecionada(numCapa);
+                {
+                    Mundo.get().player.setCapaTerrenoSelecionada(numCapa);
                     for (int j=0; j<botonCapas.length; j++) 
                     {   botonCapas[j].setColorNormal(Color.ORANGE); }
                     botonCapas[numCapa].setColorNormal(Color.GREEN);
@@ -124,7 +124,7 @@ public class BarraTerrenos extends Group
         botonSave.addListener(new InputListener()
         {
             @Override public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
-            {   SaveData.saveMap(GeoBook.get().getMapaControlador().getMapaModel()); return true; }
+            {   SaveData.saveMap(GeoBook.get().getMapaControlador().getMapa()); return true; }
         });
         
         //Boton BORRAR:
@@ -135,7 +135,7 @@ public class BarraTerrenos extends Group
         botonBorrarTerreno.addListener(new InputListener()
         {
             @Override public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
-            {   Mundo.player.setTerrenoSeleccionado(""); return true; }
+            {   Mundo.get().player.setTerrenoSeleccionado(""); return true; }
         });
     }
     
@@ -178,7 +178,7 @@ public class BarraTerrenos extends Group
             {
                 @Override public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
                 {
-                    Mundo.player.setTerrenoSeleccionado(casilla.terrenoID);
+                    Mundo.get().player.setTerrenoSeleccionado(casilla.terrenoID);
                     return true;
                 }
             });
@@ -190,7 +190,7 @@ public class BarraTerrenos extends Group
     {
         BarraTerrenos barraTerrenos = UIBook.get().getBarraTerrenos();
 
-        if (Mundo.player.getSpellSeleccionado() == SpellsData.TERRAFORMAR_ID)
+        if (Mundo.get().player.getSpellSeleccionado() == SpellsData.TERRAFORMAR_ID)
         {
             if (UIBook.get().mostrarBarraTerrenos == false)
             {

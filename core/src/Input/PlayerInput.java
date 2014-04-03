@@ -24,10 +24,10 @@ public class PlayerInput implements InputProcessor
             {
                 //si el bind no contiene ningun spell que no pase nada:
                 if (barraspells.barra.get(i).spellID.equals("")) break;
-                String antiguoSpellSeleccionado = Mundo.player.getSpellSeleccionado();
-                Mundo.player.setSpellSeleccionado(barraspells.barra.get(i).spellID);
+                String antiguoSpellSeleccionado = Mundo.get().player.getSpellSeleccionado();
+                Mundo.get().player.setSpellSeleccionado(barraspells.barra.get(i).spellID);
                 //le ponemos reborde al spell seleccionado y se lo quitamos al que estaba seleccionado:
-                barraspells.actualizarApariencia(Mundo.player.getSpellSeleccionado());
+                barraspells.actualizarApariencia(Mundo.get().player.getSpellSeleccionado());
                 barraspells.actualizarApariencia(antiguoSpellSeleccionado);
                 //Si seleccionamos el spell EditarTerreno tenemos que mostrar la barra de Terrenos:
                 //Y si seleccionamos otro spell y la barra esta mostrada, hay que ocultarla:
@@ -37,12 +37,12 @@ public class PlayerInput implements InputProcessor
         
         switch (keycode)
         {
-            case Keys.W:    Mundo.player.irArriba = true; break;
-            case Keys.S:    Mundo.player.irAbajo = true; break;
-            case Keys.A:    Mundo.player.irIzquierda = true; break;
-            case Keys.D:    Mundo.player.irDerecha = true; break;
+            case Keys.W:    Mundo.get().player.irArriba = true; break;
+            case Keys.S:    Mundo.get().player.irAbajo = true; break;
+            case Keys.A:    Mundo.get().player.irIzquierda = true; break;
+            case Keys.D:    Mundo.get().player.irDerecha = true; break;
         }
-        Mundo.player.procesarInput();
+        Mundo.get().player.procesarInput();
         return false;
     }
     
@@ -50,25 +50,25 @@ public class PlayerInput implements InputProcessor
     { 
         switch (keycode)
         {
-            case Keys.W:    {Mundo.player.irArriba = false; break; }
-            case Keys.S:    {Mundo.player.irAbajo = false; break;}
-            case Keys.A:    {Mundo.player.irIzquierda = false; break;}
-            case Keys.D:    {Mundo.player.irDerecha = false; break;}
+            case Keys.W:    {Mundo.get().player.irArriba = false; break; }
+            case Keys.S:    {Mundo.get().player.irAbajo = false; break;}
+            case Keys.A:    {Mundo.get().player.irIzquierda = false; break;}
+            case Keys.D:    {Mundo.get().player.irDerecha = false; break;}
         }
-        Mundo.player.procesarInput();
+        Mundo.get().player.procesarInput();
         return false;
     }
     
     @Override public boolean keyTyped(char character)                                       { return false; }
     @Override public boolean touchDown(int screenX, int screenY, int pointer, int button)   
-    {   if (button == Buttons.LEFT )    { Mundo.player.castear = true; Mundo.player.procesarInput(); return false; }
-        if (button == Buttons.RIGHT)    { Mundo.player.disparar = true; Mundo.player.procesarInput(); return false; }
+    {   if (button == Buttons.LEFT )    { Mundo.get().player.castear = true; Mundo.get().player.procesarInput(); return false; }
+        if (button == Buttons.RIGHT)    { Mundo.get().player.disparar = true; Mundo.get().player.procesarInput(); return false; }
         return true;
     }
     
     @Override public boolean touchUp(int screenX, int screenY, int pointer, int button)     
-    {   if (button == Buttons.LEFT)     { Mundo.player.castear = false; Mundo.player.procesarInput(); return false; }
-        if (button == Buttons.RIGHT)    { Mundo.player.disparar = false; Mundo.player.procesarInput(); return false; }
+    {   if (button == Buttons.LEFT)     { Mundo.get().player.castear = false; Mundo.get().player.procesarInput(); return false; }
+        if (button == Buttons.RIGHT)    { Mundo.get().player.disparar = false; Mundo.get().player.procesarInput(); return false; }
         return true;
     }
     
@@ -76,10 +76,10 @@ public class PlayerInput implements InputProcessor
     @Override public boolean mouseMoved(int screenX, int screenY)                           { return false; }
     @Override public boolean scrolled(int amount)                                           
     { 
-        if (amount>0)   { Mundo.player.nivelDeZoom++; }
-        else            { Mundo.player.nivelDeZoom--; }
+        if (amount>0)   { Mundo.get().player.nivelDeZoom++; }
+        else            { Mundo.get().player.nivelDeZoom--; }
         
-        switch (Mundo.player.nivelDeZoom)
+        switch (Mundo.get().player.nivelDeZoom)
         {
             case 0:     camara.zoom = 1.0f; break;
             case -1:    camara.zoom = 1/2f; break;
@@ -93,8 +93,8 @@ public class PlayerInput implements InputProcessor
             case -9:    camara.zoom = 1/10f; break;
             case -10:   camara.zoom = 1/11f; break;
         }
-        if (Mundo.player.nivelDeZoom >0 ) Mundo.player.nivelDeZoom = 0;
-        if (Mundo.player.nivelDeZoom <-10) Mundo.player.nivelDeZoom = -10;
+        if (Mundo.get().player.nivelDeZoom >0 ) Mundo.get().player.nivelDeZoom = 0;
+        if (Mundo.get().player.nivelDeZoom <-10) Mundo.get().player.nivelDeZoom = -10;
         return false; 
     }
 }

@@ -79,7 +79,7 @@ public class Pixie extends Actor
         texturaOriginal = texture;
         this.filas = filas;
         this.columnas = columnas;
-        //Calculamos el tamaño de cada frame sabiendo el tamaño total de la textura y el numero de numFilas y numCols
+        //Calculamos el tamaño de cada frame sabiendo el tamaño total de la fratextura y el numero de numFilas y numCols
         int anchoFrame = texture.getRegionWidth()/columnas;
         int altoFrame = texture.getRegionHeight()/filas;
         //una vez calculado aplicamos esas propiedades al Actor Pixie

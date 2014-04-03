@@ -3,8 +3,8 @@ package Geo;// Created by Hanto on 31/03/2014.
 import Constantes.MiscData;
 import Geo.Mapa.Celdas.Muro;
 import Geo.Mapa.Celdas.Terreno;
+import Geo.Mapa.MVC.Mapa;
 import Geo.Mapa.MVC.MapaControlador;
-import Geo.Mapa.MVC.MapaModel;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -18,7 +18,7 @@ public class GeoBook
     private MapaControlador mapaControlador;
 
     //Terrenos y Muros
-    public HashMap<String, MapaModel> listaDeMapas = new HashMap<>();
+    public HashMap<String, Mapa> listaDeMapas = new HashMap<>();
     public HashMap<String, Terreno> listaDeTerrenos = new HashMap<>();
     public HashMap<String, Muro> listaDeMuros = new HashMap<>();
 

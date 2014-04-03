@@ -34,7 +34,7 @@ public class EditarTerreno extends TipoSpell
         int y = (int)destino.y;
 
         int numCapa = caster.getCapaTerrenoSeleccionada();
-        String iDTerreno = Mundo.player.getTerrenoSeleccionado();
+        String iDTerreno = Mundo.get().player.getTerrenoSeleccionado();
 
         GeoBook.get().getMapaControlador().setTerreno(x, y, numCapa, iDTerreno);
     }

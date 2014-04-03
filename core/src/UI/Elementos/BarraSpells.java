@@ -218,7 +218,7 @@ public class BarraSpells extends Group
             group.addActor(slotvacio); 
         }
         else { group.addActor(new Image(SkillBook.get().listaDeSpells.get(casilla.spellID).getIcono())); }
-        if (casilla.spellID.equals(Mundo.player.getSpellSeleccionado())) group.addActor(new Image(Recursos.spellSeleccionado));
+        if (casilla.spellID.equals(Mundo.get().player.getSpellSeleccionado())) group.addActor(new Image(Recursos.spellSeleccionado));
         if (casilla.keyBind != null) Texto.printTexto(String.valueOf(casilla.keyBind), Recursos.font14, Color.ORANGE, Color.BLACK, 0, 20, Align.left, Align.bottom, 2, group);
     }
     

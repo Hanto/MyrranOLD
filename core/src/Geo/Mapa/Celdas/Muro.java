@@ -112,11 +112,9 @@ public class Muro extends Actor
         world.destroyBody(muroBody);
     }
     
-    public void crearMuro (Stage stage, World world, Actor player)
+    public void crearMuro (World world, Actor player)
     {
         this.player = player;
-
-        stage.addActor(this);
 
         PolygonShape tileShape = new PolygonShape();
         tileShape.setAsBox(MiscData.TILESIZE/2, MiscData.TILESIZE/2);

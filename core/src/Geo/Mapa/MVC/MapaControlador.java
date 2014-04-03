@@ -1,30 +1,47 @@
 package Geo.Mapa.MVC;// Created by Hanto on 01/04/2014.
 
+import box2dLight.RayHandler;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+
 public class MapaControlador
 {
-    private MapaView mapaView;
-    private MapaModel mapaModel;
+    private MapaView mapaView;                          //Clase que se encarga de la visualizacion de los Datos del Mapa
+    private Mapa mapa;                        //Clase que se contiene los Datos del Mapa
 
-    public MapaView getMapaView ()                  { return mapaView; }
-    public MapaModel getMapaModel()                 { return mapaModel; }
+    public MapaView getMapaView ()                      { return mapaView; }
+    public Mapa getMapa()                     { return mapa; }
+    public TiledMap getTiledMap ()                      { return mapaView.getTiledMap(); }
+    public OrthogonalTiledMapRenderer getMapRenderer()  { return mapaView.getMapRenderer(); }
+    public Stage getStageMundo ()                       { return mapaView.getStageMundo(); }
+    public World getWorld()                             { return mapaView.getWorld(); }
+    public RayHandler getRayHandler()                   { return mapaView.getRayHandler(); }
 
-    public MapaControlador (MapaModel map)
+    public MapaControlador (Mapa map, Actor player)
     {
-        mapaModel = map;
-        mapaView = new MapaView(this, mapaModel);
-        mapaView.crearTiledMap();
-        mapaView.crearMuros();
+        mapa = map;
+        mapaView = new MapaView(this, mapa, player);
     }
+
+    public void setMapa(Mapa map)
+    {
+        mapa = map;
+        mapaView.setMapa(map);
+    }
+
+    public void setRenderGrid (boolean b)           { mapaView.setRenderGrid(b);}
 
     public void setTerreno (int x, int y, int numCapa, String iDTerreno)
     {
-        mapaModel.setTerreno(x, y, numCapa, iDTerreno);
+        mapa.setTerreno(x, y, numCapa, iDTerreno);
         mapaView.crearTile(x, y, numCapa);
     }
 
     public void crearMuro (int x, int y, String iDMuro)
     {
-        if (mapaModel.setMuro(x, y, iDMuro)) mapaView.crearMuro(x, y, iDMuro);
+        if (mapa.setMuro(x, y, iDMuro)) mapaView.crearMuro(x, y, iDMuro);
     }
-
 }
