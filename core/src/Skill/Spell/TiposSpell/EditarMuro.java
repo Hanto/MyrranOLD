@@ -26,7 +26,8 @@ public class EditarMuro extends TipoSpell
 
     @Override public void ejecutarCasteo(Spell skill, Caster caster, float targetX, float targetY)
     {
-        Vector2 destino = convertirCoordenadasDestino(caster, targetX, targetY);
+        //Vector2 destino = convertirCoordenadasDestino(caster, targetX, targetY);
+        Vector2 destino = new Vector2(targetX, targetY);
         destino = convertirCoordenadasANumeroDeTile(destino);
         
         int x = (int)destino.x;

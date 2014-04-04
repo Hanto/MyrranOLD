@@ -3,7 +3,7 @@ package Geo;// Created by Hanto on 31/03/2014.
 import Constantes.MiscData;
 import Geo.Mapa.Celdas.Muro;
 import Geo.Mapa.Celdas.Terreno;
-import Geo.Mapa.MVC.Mapa;
+import Geo.Mapa.Celdas.Mapa;
 import Geo.Mapa.MVC.MapaControlador;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;

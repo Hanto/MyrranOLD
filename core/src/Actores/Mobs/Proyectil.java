@@ -1,65 +1,55 @@
 package Actores.Mobs;
 
 import Actores.Mob;
-import Graficos.Pixie;
 import Interfaces.Caster;
 import Interfaces.Debuffeable;
 import Interfaces.Vulnerable;
 import Main.Mundo;
 import Skill.Spell.Spell;
 import Skill.Spell.TiposSpell.Bolt;
-import box2dLight.PointLight;
+import Vista.Model.Proyectil.ProyectilModel;
+import Vista.Model.Proyectil.ProyectilObservador;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.utils.Array;
 
 //@author Ivan Delgado Huerta
-public class Proyectil extends Mob
+public class Proyectil extends Mob implements ProyectilModel
 {
-    protected Caster owner;                  //Quien castea el spell
-    protected Spell spell;
-   
+    protected Caster owner;                     //Quien castea el spell
+    protected Spell spell;                      //Datos del spell del cual proviene
     protected float duracionActual=0;           //Tiempo de vida que lleva el proyectil en el mundo
     protected float duracionMaxima;             //Tiempo maximo en segundos que permanece el proyectil
-    protected PointLight luz;                   //Luz que genera el Bolt
 
     //SET:
     public void setDuracionMaxima (float DuracionMaxima)    { duracionMaxima = DuracionMaxima; }
     public void setOwner (Caster Owner)                     { owner = Owner; }
     public void setSpell (Spell spell)                      { this.spell = spell; }
-    public void setPixie (Pixie pixie)                      { this.actor.addActor(new Pixie(pixie)); }
     //GET:
     public Spell getSpell()                                 { return spell; }
-    
-    
-    public Proyectil (Pixie pixie)
-    {   //Creamos la animacion del proyectil y ajustamos su centro de gravedad, lo hacemos totalmente invisible 
-        //y le ponemos una animacion de fade in para que aparezca suavemente
-        this.actor.addActor(new Pixie(pixie));
-        this.actor.setOrigin(pixie.getWidth()/2, pixie.getHeight()/2);
-        this.actor.setColor(0, 0, 0, 0);
-        this.actor.addAction(Actions.fadeIn(0.1f));
-        luz = new PointLight(Mundo.get().getRayHandler(), 100, new Color(1,0.5f,0.5f,0.4f), 200, 0, 0);
-    }
-    
-    public void expirar ()                                  { luz.remove(); Mundo.get().eliminarProyectil(this); }
+    public double getDireccion()                            { return direccion;}
+
+    //Constructor:
+    public Proyectil ()                                     { }
+
     public void crear ()                                    { Mundo.get().añadirProyectil(this);  }
+    public void expirar ()                                  { Mundo.get().eliminarProyectil(this); notificarExpiracion(); }
+
     public void consumirse(float delta)
     {
         duracionActual = duracionActual + delta;
         if (duracionActual > duracionMaxima) expirar();
     }
-    
+
     public void setPosition(float origenX, float origenY)
-    {   //tenemos que mover la entidad y su actor:
+    {
         x=origenX; y =origenY;
-        actor.setPosition(origenX, origenY);
+        notificarPosicion((int)origenX, (int)origenY);
     }
-    
+
     @Override public void setDireccion (double d)
-    {   //al cambiar la direccion del proyectil, tambien tenemos que alterar su rotacion
+    {
         super.setDireccion(d);
-        //this.pixie.rotate((float)Math.toDegrees(direccion));
-        this.actor.setRotation((float)Math.toDegrees(direccion));
+        notificarDireccion(d);
     }
     
     public void procesarColision (Vulnerable target)
@@ -77,16 +67,38 @@ public class Proyectil extends Mob
         oldPosX = x;
         oldPosY = y;
 
-        x=  (float)(x+ (Math.cos(direccion))*velocidad*velocidadMod*delta);
-        y=  (float)(y+ (Math.sin(direccion))*velocidad*velocidadMod*delta);
+        float newPosX =  (float)(x+ (Math.cos(direccion))*velocidad*velocidadMod*delta);
+        float newPosY =  (float)(y+ (Math.sin(direccion))*velocidad*velocidadMod*delta);
 
-        actor.setPosition(x, y);
-        luz.setPosition(x+actor.getOriginX(), y+actor.getOriginY());
+        setPosition(newPosX, newPosY);
     }
     
     public void actualizar (float delta)
     {
         consumirse(delta);
         moverse(delta);
+    }
+
+    protected Array<ProyectilObservador>listaObservadores = new Array<>();
+
+    public void añadirObservador(ProyectilObservador observador)
+    {   listaObservadores.add(observador); }
+
+    public void eliminarObservador(ProyectilObservador observador)
+    {   listaObservadores.removeValue(observador, true); }
+
+    public void notificarPosicion(int x, int y)
+    {   for (ProyectilObservador observador: listaObservadores)
+            observador.proyectilPosition(x, y);
+    }
+
+    public void notificarDireccion (double direccion)
+    {   for (ProyectilObservador observador: listaObservadores)
+            observador.proyectilDireccion(direccion);
+    }
+
+    public void notificarExpiracion ()
+    {   for (ProyectilObservador observador: listaObservadores)
+            observador.proyectilExpirar();
     }
 }

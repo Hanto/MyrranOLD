@@ -1,5 +1,6 @@
 package Geo.Mapa.MVC;// Created by Hanto on 01/04/2014.
 
+import Geo.Mapa.Celdas.Mapa;
 import box2dLight.RayHandler;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;

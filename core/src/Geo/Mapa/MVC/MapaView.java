@@ -2,6 +2,7 @@ package Geo.Mapa.MVC;
 
 import Constantes.MiscData;
 import Geo.GeoBook;
+import Geo.Mapa.Celdas.Mapa;
 import Geo.Mapa.Celdas.Muro;
 import Geo.Mapa.TileCreador;
 import Resources.Recursos;
@@ -11,13 +12,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 
 /**
  * @author Ivan Delgado Huerta
@@ -26,7 +27,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 //Clase que representa la Vista del Mapa, se encarga unicamente de renderizar los datos contenidos en el Mapa
 public class MapaView
 {
-    private Mapa mapa;                    //Mapa del que extrae los Datos
+    private Mapa mapa;                              //Mapa del que extrae los Datos
     private MapaControlador mapaControlador;        //Clase a traves de la cual se interactuan con los datos
                                                     //y a la vez los cambios se ven reflejos en el view
     private TiledMap tiledMap;
@@ -103,15 +104,15 @@ public class MapaView
                         cell.setTile(tileNO);
                         suelo.setCell(x*2, y*2+1, cell);
 
-                        cell = new TiledMapTileLayer.Cell();
+                        cell = new Cell();
                         cell.setTile(tileNE);
                         suelo.setCell(x*2+1, y*2+1, cell);
 
-                        cell = new TiledMapTileLayer.Cell();
+                        cell = new Cell();
                         cell.setTile(tileSO);
                         suelo.setCell(x*2, y*2, cell);
 
-                        cell = new TiledMapTileLayer.Cell();
+                        cell = new Cell();
                         cell.setTile(tileSE);
                         suelo.setCell(x*2+1, y*2, cell);
                     }

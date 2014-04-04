@@ -1,13 +1,20 @@
 package Actores.Mobs.Personajes.PCs;
+
 import Actores.Mobs.Personajes.PC;
 import Constantes.MiscData;
 import MobileEstados.Player.PlayerEstado;
+import Vista.Model.Player.PlayerModel;
+import Vista.Model.Player.PlayerObservador;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.utils.Array;
 
 //* @author Ivan Delgado Huerta
 // Player representa de todos los personajes controlados por el jugador, el que esta siendo usado localmente desde esta maquina
-public class Player extends PC
+public class Player extends PC implements PlayerModel
 {
+    private Array<PlayerObservador> listaObservadores = new Array<>();
+
     public int nivelDeZoom = 0;
     
     protected PlayerEstado estado;
@@ -31,6 +38,7 @@ public class Player extends PC
     protected int teclaDerecha = Keys.D;
     
     public void procesarInput()                 { estado.procesarInput(); }
+    public PlayerEstado getEstado()             { return estado; }
     
     //CONSTRUCTOR:
     public Player(final int numRaza, int posX, int posY, String nombre)
@@ -42,19 +50,23 @@ public class Player extends PC
     private void inicializar (int posX, int posY)
     {   velocidadMax = MiscData.PLAYER_VelocidadMax_Pixeles_Sec;
         setPosition (posX, posY);
+        notificarPlayerPositicion(posX, posY);
     }
     
     public void setPosition (float X, float Y)
     {   x = X; y = Y;
         actor.setPosition((int)X, (int)Y);
+        notificarPlayerPositicion((int) X, (int) Y);
     }
     public void setX (float X)
     {   x = X;
         actor.setX((int)X);
+        notificarPlayerPositicion((int) x, (int) y);
     }
     public void setY (float Y)
     {   y = Y;
         actor.setY((int)Y);
+        notificarPlayerPositicion((int) x, (int) y);
     }
     
     public void moverse (float delta)
@@ -90,8 +102,25 @@ public class Player extends PC
     
     public void actualizarCastingTime(float delta)
     {   //Actualizamos el cooldown de casteo:
-        if ( isCasteando ) { actualCastingTime = actualCastingTime + delta; }
-        if ( isCasteando && actualCastingTime >= totalCastingTime) { isCasteando = false; actualCastingTime = 0; totalCastingTime =0;}
+        if ( isCasteando )
+        {
+            actualCastingTime = actualCastingTime + delta;
+            notificarCastingTimePercent(getCastingTimePercent());
+        }
+        if ( isCasteando && actualCastingTime >= totalCastingTime)
+        {
+            actualCastingTime = 0;
+            totalCastingTime =0;
+            isCasteando = false;
+            notificarPlayerIsCasteando(isCasteando);
+            notificarCastingTimePercent(getCastingTimePercent());
+        }
+    }
+
+    public void setCastingTime(float totalCastingTime)
+    {
+        super.setCastingTime(totalCastingTime);
+        notificarPlayerIsCasteando(isCasteando);
     }
     
     public void castear ()
@@ -105,5 +134,48 @@ public class Player extends PC
         moverse(delta);
         actualizarCastingTime (delta);
         castear();
+    }
+
+    @Override public void modificarHPs (int HPs, Color color)
+    {
+        super.modificarHPs(HPs, color);
+        notificarHPsPercent(this.getHPsPercent());
+        notificarModificarHPs(HPs, color);
+    }
+
+    @Override public void añadirObservador(PlayerObservador observador)
+    {   listaObservadores.add(observador); }
+
+    @Override public void eliminarObservador(PlayerObservador observador)
+    {   listaObservadores.add(observador); }
+
+    public void notificarPlayerPositicion(int x, int y)
+    {
+        for (PlayerObservador observador: listaObservadores)
+            observador.playerPosition(x, y);
+    }
+
+    public void notificarPlayerIsCasteando(boolean isCasteando)
+    {
+        for (PlayerObservador observador: listaObservadores)
+            observador.playerIsCasteando(isCasteando);
+    }
+
+    public void notificarCastingTimePercent(float castingTimePercent)
+    {
+        for (PlayerObservador observador: listaObservadores)
+            observador.playerCastingTimePercent(castingTimePercent);
+    }
+
+    public void notificarHPsPercent (float HpsPercent)
+    {
+        for (PlayerObservador observador: listaObservadores)
+            observador.playerHPsPercent(HpsPercent);
+    }
+
+    public void notificarModificarHPs (int HPs, Color color)
+    {
+        for (PlayerObservador observador: listaObservadores)
+            observador.playerModifacionHPs(HPs, color);
     }
 }

@@ -8,11 +8,11 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 
-public class TiledMapVista extends TiledMap
+public class TiledMapMundo extends TiledMap
 {
     private Vista vista;
 
-    public TiledMapVista (Vista vista)
+    public TiledMapMundo(Vista vista)
     {
         this.vista = vista;
         crearTiledMap();

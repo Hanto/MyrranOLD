@@ -4,22 +4,22 @@ import Actores.Mobs.Personajes.PCs.Player;
 import Actores.Mobs.Proyectil;
 import Geo.Mapa.Celdas.Muro;
 import Skill.Aura.BDebuff;
-import Vista.Model.MundoModelInterface;
-import Vista.Model.MundoModelObservador;
+import Vista.Model.Mundo.MundoModel;
+import Vista.Model.Mundo.MundoObservador;
 import box2dLight.RayHandler;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
  //* @author Ivan Delgado Huerta
 
 //SINGLETON PATTERN:
-public class Mundo implements MundoModelInterface
+public class Mundo implements MundoModel
 {
     public Player player;
     public Array<Player> listaDePlayers = new Array<>();
     public Array<Proyectil> listaDeProyectiles = new Array<>();
     public Array<Muro> listaDeMuros = new Array<>();
 
-    public Array<MundoModelObservador> listaObservadores = new Array<>();
+    public Array<MundoObservador> listaObservadores = new Array<>();
 
     private Stage stageMundo;
     private RayHandler rayHandler;
@@ -49,10 +49,7 @@ public class Mundo implements MundoModelInterface
     }
 
     @Override public void eliminarProyectil (Proyectil proyectil)
-    {
-        listaDeProyectiles.removeValue(proyectil, true);
-        notificarEliminarProyectil(proyectil);
-    }
+    {   listaDeProyectiles.removeValue(proyectil, true); }
         
     public void actualizarPlayers (float delta)
     {
@@ -76,21 +73,15 @@ public class Mundo implements MundoModelInterface
         }
     }
 
-    @Override public void añadirObservador(MundoModelObservador observador)
+    @Override public void añadirObservador(MundoObservador observador)
     {   listaObservadores.add(observador); }
 
-    @Override public void eliminarObservador(MundoModelObservador observador)
+    @Override public void eliminarObservador(MundoObservador observador)
     {   listaObservadores.removeValue(observador, true); }
 
     public void notificarAñadirProyectil(Proyectil proyectil)
     {
         for (int i=0; i<listaObservadores.size; i++)
         {   listaObservadores.get(i).añadirProyectil(proyectil); }
-    }
-
-    public void notificarEliminarProyectil(Proyectil proyectil)
-    {
-        for (int i=0; i<listaObservadores.size; i++)
-        {   listaObservadores.get(i).eliminarProyectil(proyectil); }
     }
 }

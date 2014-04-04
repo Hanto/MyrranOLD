@@ -201,7 +201,7 @@ public class Pixie extends Actor
         //si forzamos la nueva animacion, es que se tiene que mostrar por encima de la que se este mostrando, aunque sea la misma
         //la forma de emularlo, puesto que volverla a cargar es redundante, es reiniciarla, ponerla desde el principio
         if (forzarAnimacion)                                        { stateTime = 0f; }
-        
+
         if (numAnimacion != this.numAnimacion)
         {
             Animacion animacion = animaciones.get(numAnimacion);

@@ -7,7 +7,7 @@ public class TipoSpellsData
     public static final String  BOLT_ID = "Proyectil";
     public static final String  BOLT_Icono = "FireBall";
     public static final String  BOLT_CastingTime_String = "Casting Time";
-    public static final float   BOLT_CastingTime_Valor = 0.6f;
+    public static final float   BOLT_CastingTime_Valor = 0.5f;
     public static final String  BOLT_Daño_String = "Daño";
     public static final float   BOLT_Daño_Valor = 100f;
     public static final String  BOLT_Velocidad_String = "Velocidad";

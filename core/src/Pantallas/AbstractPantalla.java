@@ -6,13 +6,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public abstract class AbstractPantalla implements Screen
 {
     protected final Myrran myrran;
     protected final SpriteBatch batch;
-    protected final ShapeRenderer shape;
+    //protected final ShapeRenderer shape;
     //protected final InputMultiplexer inputMultiplexer;
     //protected final Stage stageUI;
 
@@ -25,7 +24,7 @@ public abstract class AbstractPantalla implements Screen
     {
         this.myrran = myrran;                       //Es necesario disponer de la clase myrran, para poder por ejemplo cambiar de pantalla con el metodo myrran.navegarA(screen)
         this.batch = new SpriteBatch ();            //El SpriteBatch es el encargado de dibujar Bitmaps en pantalla, no es una variable, es un motor de dibujado, lo creamos para tenerlo listo
-        this.shape = new ShapeRenderer ();          //El shapeRenderer es como el anterior pero encargado de dibujar lineas
+        //this.shape = new ShapeRenderer ();          //El shapeRenderer es como el anterior pero encargado de dibujar lineas
         //this.stageUI = new Stage();
         //this.inputMultiplexer = new InputMultiplexer();
     }
@@ -80,7 +79,7 @@ public abstract class AbstractPantalla implements Screen
         Gdx.app.log( myrran.LOG, "DISPOSE (Liberando memoria): "+ getNombrePantalla());
         //Antes de liberar los recursos nos aseguramos que esten llenos, si no, da error
         if (batch != null) batch.dispose();
-        if (shape != null) shape.dispose();
+        //if (shape != null) shape.dispose();
         //if (stageUI != null) stageUI.dispose();
     }
 }

@@ -12,7 +12,7 @@ public class StageMundo extends Stage
 {
     private Vista vista;
 
-    static class OrdnarPorProfundidad implements Comparator<Actor>
+    static class OrdenarPorProfundidad implements Comparator<Actor>
     {
         @Override public int compare(Actor o1, Actor o2)
         {
@@ -74,12 +74,14 @@ public class StageMundo extends Stage
 
     public void crearMobs ()
     {
-        addActor(vista.mundo.getPlayer().getActor());
-
+        //addActor(vista.mundo.getPlayer().getActor());
+        /*
         for (int i=0; i<vista.mundo.getListaDePlayers().size; i++)
-        {   addActor(vista.mundo.getListaDePlayers().get(i).getActor()); }
-
+        {   addActor(vista.mundo.getListaDePlayers().get(i).getActor()); }*/
+        /*
         for (int i=0; i<vista.mundo.getListaDeProyectiles().size; i++)
-        {   addActor(vista.mundo.getListaDeProyectiles().get(i).getActor());}
+        {   addActor(vista.mundo.getListaDeProyectiles().get(i).getActor());}*/
     }
+
+    public void ordenarPorProfundidad () { this.getActors().sort(new OrdenarPorProfundidad()); }
 }

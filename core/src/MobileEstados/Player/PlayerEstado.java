@@ -4,13 +4,22 @@ package MobileEstados.Player;
 import Actores.Mobs.Personajes.PCs.Player;
 import Graficos.Pixie;
 import Resources.Recursos;
+import Vista.Model.PlayerEstado.PlayerEstadoModel;
+import Vista.Model.PlayerEstado.PlayerEstadoObservador;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 
-public class PlayerEstado
+public class PlayerEstado implements PlayerEstadoModel
 {
     protected Estado estado;                    //Estado actual, hace que mismos inputs produzcan diferentes resultados
     protected Player player;                    //Player al que hace referencia, para poder consultar sus datos facilmente
-    
+
+    public Vector2 clickPantalla;
+
+    protected int iDEstado=0;
+
+
     //Clase ESTADO: define cada uno de los estados en los que puede estar un player:
     public interface Estado 
     {   public void procesarInput (PlayerEstado playerE);   //reacciona a los diferentes inputs segun el estado en el que estemos
@@ -22,7 +31,7 @@ public class PlayerEstado
     public void actualizar ()                   { estado.actualizar(this); }
     
     //Cada estado contiene un constructor con las restricciones iniciales de movimiento y con la animacion que usa ese estado
-    //Desde cada estado un mismo Input produce efectos diferentes y conduce a estados diferentes tambien
+    //Desde cada estado un mismo Vista.Controller.Input produce efectos diferentes y conduce a estados diferentes tambien
     //cada estado dispone tambien de un metodo de Update, por si hay que actualizar barras de carga, o power ups, etc...
     
     //Estado QUIETO:
@@ -37,17 +46,15 @@ public class PlayerEstado
             playerE.player.rumboSur = false;
             playerE.player.rumboEste = false; 
             playerE.player.rumboOeste = false;
-            playerE.player.getPixiePC().setAnimacion(5, false); 
+            //TODO: playerE.player.getPixiePC().setAnimacion(5, false);
+            playerE.iDEstado = 5;
+            playerE.notificarPlayerEstado();
         }
         @Override public void procesarInput(PlayerEstado playerE)
         {   if (playerE.player.castear && !playerE.player.isCasteando)
-            {   //Castear no es un estado, solapa el estado actual, por tanto solo lanza el casteo y la animacion
-                castear(playerE); //cargamos una segunda animacion, para que cuando acabe el casteo se muestre
-                if (playerE.player.isCasteando)
-                {   playerE.player.getPixiePC().setAnimacion(4, false); 
-                    playerE.player.getPixiePC().setAnimacion(5, false);
-                }
-            }   //cualquier accion hace que cambie el estado:
+            {   //Castear no es un estado, es una accion valida en este estado, por tanto no cambia de estado
+                castear(playerE);
+            }   //cualquier otra accion hace que cambie el estado:
             if (playerE.player.disparar)        { playerE.estado = new Disparando(playerE); return; }
             if (playerE.player.irDerecha)       { playerE.estado = new Este(playerE); return; }
             if (playerE.player.irIzquierda)     { playerE.estado = new Oeste(playerE); return; }
@@ -69,17 +76,16 @@ public class PlayerEstado
             playerE.player.rumboSur = false;
             playerE.player.rumboEste = false; 
             playerE.player.rumboOeste = false;
-            playerE.player.getPixiePC().setAnimacion(getAngulo(playerE), false);
+            //TODO: playerE.player.getPixiePC().setAnimacion(getAngulo(playerE), false);
+            playerE.iDEstado = 6;
+            playerE.notificarPlayerEstado();
         }
         @Override public void procesarInput(PlayerEstado playerE)
-        {   if (playerE.player.disparar)
-            {   
-                if (playerE.player.castear && !playerE.player.isCasteando)
-                {   
-                    castear(playerE);  
-                    if (playerE.player.isCasteando) { playerE.player.getPixiePC().setAnimacion(4, false); }
-                }   //para averiguar que animacion de disparo cargar, debemos calcular el angulo entre player y puntero
-                playerE.player.getPixiePC().setAnimacion(getAngulo(playerE), false);
+        {   if (playerE.player.castear && !playerE.player.isCasteando) { castear(playerE); }
+            if (playerE.player.disparar && !playerE.player.isCasteando)
+            {   //TODO: playerE.player.getPixiePC().setAnimacion(getAngulo(playerE), false);
+                playerE.iDEstado = 6;
+                playerE.notificarPlayerEstado();
             }  
             else if (!playerE.player.disparar)
             {   //si no disparamos hay que cambiar de estado:
@@ -107,17 +113,15 @@ public class PlayerEstado
             playerE.player.rumboSur = false;
             playerE.player.rumboEste = playerE.player.irDerecha; 
             playerE.player.rumboOeste = playerE.player.irIzquierda;
-            playerE.player.getPixiePC().setAnimacion(2, false);    
+            //TODO: playerE.player.getPixiePC().setAnimacion(2, false);
+            playerE.iDEstado = 2;
+            playerE.notificarPlayerEstado();
         }
         @Override public void procesarInput(PlayerEstado playerE)
         {   if (playerE.player.castear && !playerE.player.isCasteando)
-            {   //Castear no es un estado, solapa el estado actual, por tanto solo lanza el casteo y la animacion
-                castear(playerE); //cargamos una segunda animacion, para que cuando acabe el casteo se muestre
-                if (playerE.player.isCasteando) 
-                {   playerE.player.getPixiePC().setAnimacion(4, false); 
-                    playerE.player.getPixiePC().setAnimacion(2, false);
-                } 
-            }   //cualquier accion que no implique ir en la direccion del Estado hara cambiar de estado:
+            {   //Castear no es un estado, es una accion valida en este estado, por tanto no cambia de estado
+                castear(playerE);
+            }   //cualquier otra accion hace que cambie el estado:
             if (playerE.player.disparar)        { playerE.estado = new Disparando(playerE); return; }
             if (playerE.player.irAbajo)         { playerE.estado = new Sur(playerE); return; }
             if (!playerE.player.irArriba)
@@ -142,17 +146,15 @@ public class PlayerEstado
             playerE.player.rumboSur = playerE.player.irAbajo;
             playerE.player.rumboEste = playerE.player.irDerecha; 
             playerE.player.rumboOeste = playerE.player.irIzquierda;
-            playerE.player.getPixiePC().setAnimacion(3, false); 
+            //TODO: playerE.player.getPixiePC().setAnimacion(3, false);
+            playerE.iDEstado = 3;
+            playerE.notificarPlayerEstado();
         }
         @Override public void procesarInput(PlayerEstado playerE)
         {   if (playerE.player.castear && !playerE.player.isCasteando)
-            {   //Castear no es un estado, solapa el estado actual, por tanto solo lanza el casteo y la animacion
-                castear(playerE); //cargamos una segunda animacion, para que cuando acabe el casteo se muestre
-                if (playerE.player.isCasteando) 
-                {   playerE.player.getPixiePC().setAnimacion(4, false); 
-                    playerE.player.getPixiePC().setAnimacion(3, false);
-                } 
-            }   //cualquier accion que no implique ir en la direccion del Estado hara cambiar de estado:
+            {   //Castear no es un estado, es una accion valida en este estado, por tanto no cambia de estado
+                castear(playerE);
+            }   //cualquier otra accion hace que cambie el estado:
             if (playerE.player.disparar)        { playerE.estado = new Disparando(playerE); return; }
             if (playerE.player.irArriba)        { playerE.estado = new Norte(playerE); return; }
             else if (!playerE.player.irAbajo)
@@ -177,17 +179,15 @@ public class PlayerEstado
             playerE.player.rumboSur = playerE.player.irAbajo;
             playerE.player.rumboEste = false; 
             playerE.player.rumboOeste = playerE.player.irIzquierda;
-            playerE.player.getPixiePC().setAnimacion(0, false);
+            //TODO: playerE.player.getPixiePC().setAnimacion(0, false);
+            playerE.iDEstado = 0;
+            playerE.notificarPlayerEstado();
         }
         @Override public void procesarInput(PlayerEstado playerE)
         {   if (playerE.player.castear && !playerE.player.isCasteando)
-            {   //Castear no es un estado, solapa el estado actual, por tanto solo lanza el casteo y la animacion
-                castear(playerE); //cargamos una segunda animacion, para que cuando acabe el casteo se muestre
-                if (playerE.player.isCasteando) 
-                {   playerE.player.getPixiePC().setAnimacion(4, false); 
-                    playerE.player.getPixiePC().setAnimacion(0, false);
-                } 
-            }   //cualquier accion que no implique ir en la direccion del Estado hara cambiar de estado:
+            {   //Castear no es un estado, es una accion valida en este estado, por tanto no cambia de estado
+                castear(playerE);
+            }   //cualquier otra accion hace que cambie el estado:
             if (playerE.player.disparar)        { playerE.estado = new Disparando(playerE); return; }
             if (playerE.player.irDerecha)       { playerE.estado = new Este(playerE); return; }
             else if (!playerE.player.irIzquierda)
@@ -212,17 +212,15 @@ public class PlayerEstado
             playerE.player.rumboSur = playerE.player.irAbajo;
             playerE.player.rumboEste = playerE.player.irDerecha; 
             playerE.player.rumboOeste = false;
-            playerE.player.getPixiePC().setAnimacion(1, false); 
+            //TODO: playerE.player.getPixiePC().setAnimacion(1, false);
+            playerE.iDEstado = 1;
+            playerE.notificarPlayerEstado();
         }
         @Override public void procesarInput(PlayerEstado playerE)
         {   if (playerE.player.castear && !playerE.player.isCasteando)
-            {   //Castear no es un estado, solapa el estado actual, por tanto solo lanza el casteo y la animacion
-                castear(playerE); //cargamos una segunda animacion, para que cuando acabe el casteo se muestre
-                if (playerE.player.isCasteando) 
-                {   playerE.player.getPixiePC().setAnimacion(4, false); 
-                    playerE.player.getPixiePC().setAnimacion(1, false);
-                } 
-            }   //cualquier accion que no implique ir en la direccion del Estado hara cambiar de estado:
+            {   //Castear no es un estado, es una accion valida en este estado, por tanto no cambia de estado
+                castear(playerE);
+            }   //cualquier otra accion hace que cambie el estado:
             if (playerE.player.disparar)        { playerE.estado = new Disparando(playerE); return; }
             if (playerE.player.irIzquierda)     { playerE.estado = new Oeste(playerE); return; }
             else if (!playerE.player.irDerecha)
@@ -249,8 +247,22 @@ public class PlayerEstado
                 Pixie polvo = new Pixie(Recursos.polvoPasos);
                 polvo.setPosition(playerE.player.getX(), playerE.player.getY());
                 polvo.setAnimacion(0, true);
-                playerE.player.getActor().getStage().addActor(polvo);
+                //playerE.player.getActor().getStage().addActor(polvo);
             }
         }
+    }
+
+    protected Array<PlayerEstadoObservador> listaObservadores = new Array<>();
+    @Override public void añadirObservador(PlayerEstadoObservador observador)
+    {   listaObservadores.add(observador); }
+
+    @Override public void eliminarObservador(PlayerEstadoObservador observador)
+    {   listaObservadores.removeValue(observador, true); }
+
+    public int getEstado()                          { return iDEstado; }
+    public void notificarPlayerEstado()
+    {
+        for (PlayerEstadoObservador observador: listaObservadores)
+            observador.setPlayerEstado(iDEstado);
     }
 }

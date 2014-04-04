@@ -1,7 +1,6 @@
 package Graficos;
 
 import Constantes.MiscData;
-import Interfaces.Nameplatable;
 import Resources.Recursos;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -10,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 // @author Ivan Delgado Huerta
 public class Nameplate extends Group
 {
-    protected Nameplatable personaje;
     //NAMEPLATES
     protected Sprite barraVidaTotal;                //Imagen que contiene el nameplateTotal de la vida del Player
     protected Sprite barraVidaActual;               //Imagen que contiene el fondo de la vida del nameplateTotal del Player
@@ -19,10 +17,8 @@ public class Nameplate extends Group
     protected Sprite barraCasteoActual;
     protected float ultimoCasteoRenderizado;
         
-    public Nameplate (Nameplatable personaje)
+    public Nameplate ()
     {
-        this.personaje = personaje;
-        
         barraVidaTotal = new Sprite(Recursos.nameplateTotal);
         barraVidaActual = new Sprite(Recursos.nameplateActual);
         barraCasteoTotal = new Sprite(Recursos.nameplateTotal);
@@ -41,9 +37,20 @@ public class Nameplate extends Group
         this.setHeight(alto);
         this.setBounds(0, 0, ancho, alto);
     }
+
+    public void setHPsPercent (float HPsPercent)
+    {
+        float tamaño = (1 - HPsPercent) * this.getWidth();
+        if (tamaño != barraVidaActual.getWidth()) barraVidaActual.setSize(-(int) tamaño, this.getHeight());
+    }
+
+    public void setCastingTimePercent (float castingTimePercent)
+    {
+        float tamaño = (1-castingTimePercent)*this.getWidth();
+        if (tamaño != barraCasteoActual.getWidth()) barraCasteoActual.setSize(-(int)tamaño, this.getHeight());
+    }
    
-    @Override
-    public void act(float delta)
+    @Override public void act(float delta)
     {
         float alto = this.getHeight();
         float ancho = this.getWidth();
@@ -55,10 +62,12 @@ public class Nameplate extends Group
         barraCasteoActual.setPosition(this.getX()+ancho-1, this.getY());        
     }
     
-    @Override
-    public void draw (Batch batch, float alpha)
+    @Override public void draw (Batch batch, float alpha)
     {
-        dibujarNameplate (batch, alpha);
+        barraVidaTotal.draw(batch, alpha);
+        barraVidaActual.draw(batch, alpha);
+        barraCasteoTotal.draw(batch, alpha);
+        barraCasteoActual.draw(batch, alpha);
     }
     
     public void dibujarNameplate (Batch batch, float alpha)
@@ -66,8 +75,8 @@ public class Nameplate extends Group
         float ancho = this.getWidth();
         float alto = this.getHeight();
         
-        int tamañoBarraVida = (int)((1-personaje.getHPsPercent())*ancho);
-        int tamañoBarraCasteo = (int)((1-personaje.getCastingTimePercent())*ancho);
+        int tamañoBarraVida = (int)((1-0.5)*ancho);//(int)((1-personaje.getHPsPercent())*ancho);
+        int tamañoBarraCasteo = (int)((1-0.5)*ancho);//(int)((1-personaje.getCastingTimePercent())*ancho);
         
         barraVidaTotal.draw(batch, alpha);
         if (tamañoBarraVida != ultimosHPsRenderizados)

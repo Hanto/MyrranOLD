@@ -5,7 +5,6 @@ import Graficos.Nameplate;
 import Graficos.Texto;
 import Interfaces.Caster;
 import Interfaces.Debuffeable;
-import Interfaces.Nameplatable;
 import Interfaces.Vulnerable;
 import Resources.Recursos;
 import Skill.Aura.BDebuff;
@@ -19,7 +18,7 @@ import com.badlogic.gdx.utils.Array;
  */
 
 // la clase Personaje incluye a todos los seres vivos del juego, sean controlados por el jugador o por la maquina
-public class Personaje extends Mob implements Vulnerable, Debuffeable, Caster, Nameplatable
+public class Personaje extends Mob implements Vulnerable, Debuffeable, Caster
 {
     protected String nombre;
     protected int nivel;
@@ -55,7 +54,6 @@ public class Personaje extends Mob implements Vulnerable, Debuffeable, Caster, N
     public void setIsCasteando (boolean b)                  { isCasteando = b; }
     public void setActualCastingTime (float i)              { actualCastingTime = i; }
     public void setTotalCastingTime (float i)               { totalCastingTime = i; }
-    public void setCastingTime (float actual, float total)  { actualCastingTime = actual; totalCastingTime = total;}
     public void setSpellSeleccionado (String spellID)       { spellSeleccionado = spellID; }
     public void setTerrenoSeleccionado (String terrenoID)   { terrenoSeleccionado = terrenoID; }
     public void setCapaTerrenoSelecionada (int capaTerreno) { capaTerrenoSeleccionada = capaTerreno; }
@@ -88,15 +86,15 @@ public class Personaje extends Mob implements Vulnerable, Debuffeable, Caster, N
     @Override public void setCastingTime(float totalCastingTime)
     {
         isCasteando = true;
-        setCastingTime(0, totalCastingTime);
+        actualCastingTime = 0;
+        this.totalCastingTime = totalCastingTime;
     }
     @Override public boolean isCasteando()                  { return isCasteando; }
     @Override public boolean isPlayer()                     { return true; }
     @Override public Group getActor ()                      { return actor; }
     @Override public int getCapaTerrenoSeleccionada ()      { return capaTerrenoSeleccionada; }
 
-    //NAMEPLATABLE:
-    @Override public float getHPsPercent()                  { return ((float)actualHPs/(float)maxHPs); }
-    @Override public float getCastingTimePercent()          { return (actualCastingTime/totalCastingTime); }
+    public float getHPsPercent()                  { return ((float)actualHPs/(float)maxHPs); }
+    public float getCastingTimePercent()          { return (actualCastingTime/totalCastingTime); }
 
 }

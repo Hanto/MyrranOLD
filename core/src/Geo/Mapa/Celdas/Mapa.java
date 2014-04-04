@@ -1,19 +1,18 @@
-package Geo.Mapa.MVC;// Created by Hanto on 01/04/2014.
+package Geo.Mapa.Celdas;// Created by Hanto on 01/04/2014.
 
 import Constantes.MiscData;
-import Geo.Mapa.Celdas.Celda;
-import Vista.Model.MapaModelInterface;
-import Vista.Model.MapaModelObservador;
+import Vista.Model.Mapa.MapaModel;
+import Vista.Model.Mapa.MapaObservador;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.UUID;
 
-public class Mapa implements MapaModelInterface
+public class Mapa implements MapaModel
 {
     private String id;
     private String nombre;
     private Celda[][] matriz = new Celda[MiscData.MAPA_Max_X][MiscData.MAPA_Max_Y];
-    private Array<MapaModelObservador> listaObservadores;
+    private Array<MapaObservador> listaObservadores = new Array<>();
 
     //SET
     public void setId (String ID)                   { id = ID; }
@@ -41,8 +40,8 @@ public class Mapa implements MapaModelInterface
                 matriz[x][y] = celda;
             }
         }
-        listaObservadores = new Array<>();
     }
+
     @Override public Mapa getMapa ()                    { return this; }
     @Override public boolean setTerreno (int x, int y, int numCapa, String iDTerreno)
     {
@@ -57,7 +56,8 @@ public class Mapa implements MapaModelInterface
 
     @Override public boolean setMuro (int x, int y, String iDMuro)
     {
-        if (matriz[x][y].getMuroID().length() <= 0)
+        if (x<0 || y<0 || x> MiscData.MAPA_Max_X || y> MiscData.MAPA_Max_Y) { return false; }
+        else if (matriz[x][y].getMuroID().length() <= 0)
         {
             matriz[x][y].setMuroId(iDMuro);
             notificarSetMuro(x, y);
@@ -66,21 +66,19 @@ public class Mapa implements MapaModelInterface
         else return false;
     }
 
-    @Override public void añadirObservador(MapaModelObservador observador)
+    @Override public void añadirObservador(MapaObservador observador)
     {   listaObservadores.add(observador); }
 
-    @Override public void eliminarObservador(MapaModelObservador observador)
+    @Override public void eliminarObservador(MapaObservador observador)
     {   listaObservadores.removeValue(observador, true); }
 
     public void notificarSetTerreno(int x, int y, int numCapa)
-    {
-        for (MapaModelObservador observador : listaObservadores)
+    {   for (MapaObservador observador : listaObservadores)
             observador.setTerreno(x,y,numCapa);
     }
 
     public void notificarSetMuro(int x, int y)
-    {
-        for (MapaModelObservador observador : listaObservadores)
+    {   for (MapaObservador observador : listaObservadores)
             observador.setMuro(x, y);
     }
 }

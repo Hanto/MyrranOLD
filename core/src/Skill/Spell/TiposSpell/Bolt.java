@@ -62,20 +62,21 @@ public class Bolt extends TipoSpell
         double direccion;
         //Convertimos las coordenadas de pantalla del click en pantalla en coordenadas de mundo para comparar posiciones con el caster
         //y asi deducir la direccion de salida del pepo, en caso de ser un NPC no hace falta puesto que no estos no clickan en pantalla:
-        destino = convertirCoordenadasDestino(caster, destinoX, destinoY);
+        //destino = convertirCoordenadasDestino(caster, destinoX, destinoY);
         //Establecemos el punto de salida del pepo, suele ser el centro de gravedadad del Pixie (altura/2) (anchura/2):
         origen = convertirCoordenadasOrigen(caster);
+        destino = new Vector2(destinoX, destinoY);
         //Cargamos los pixies de las 2 animaciomes que necesita el spell, cada animacion tiene muchos pixies disponibles donde elegir
         //de indicarnos que pixie exacto usa este spell se encarga el array pixieSeleccionado:
         Pixie casteo = getPixie(PIXIE_Casteos, spell.pixieSeleccionado()[PIXIE_Casteos]);
-        Pixie proyectil = getPixie(PIXIE_Proyectiles, spell.pixieSeleccionado()[PIXIE_Proyectiles]);
+        //Pixie proyectil = getPixie(PIXIE_Proyectiles, spell.pixieSeleccionado()[PIXIE_Proyectiles]);
         //Ajustamos la posicion de origen y destino para que que esa posicion coincida con el centro de gravedad del pixie:
-        ajustarCoordenadasPorProyectil(proyectil, origen, destino);
+        //ajustarCoordenadasPorProyectil(proyectil, origen, destino);
         //Calculamos la direccion del proyectil en funcion de todas las coordenas previamente ajustadas:
         direccion = calcularDireccion(origen, destino);
         
         //Creamos la entidad proyectil e inicializamos sus datos:
-        Proyectil pepo = new Proyectil(proyectil);
+        Proyectil pepo = new Proyectil();
         pepo.setSpell(spell);
         pepo.setPosition(origen.x, origen.y);
         pepo.setDireccion(direccion);
